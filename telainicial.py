@@ -5,9 +5,9 @@ def inicializa():
     altura_tela = 835
     janela = pygame.display.set_mode((largura_tela, altura_tela))
     pygame.display.set_caption("")
-    fundo = pygame.image.load("c:/Users/erick/Downloads/insperfighter/ARENA.png")
+    fundo = pygame.image.load("ARENA.png")
     fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
-    titulo_img = pygame.image.load("c:/Users/erick/Downloads/insperfighter/titulo.png")
+    titulo_img = pygame.image.load("titulo.png")
     titulo_img = pygame.transform.scale(titulo_img, (450, 350)) #coordenadas da imagem do titulo
     pygame.font.init()
     fonte_subtitulo = pygame.font.Font(None, 45) #tamanho e fonte da letra  
