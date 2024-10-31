@@ -5,7 +5,7 @@ largura_tela = 1550
 altura_tela = 835
 janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("")
-fundo = pygame.image.load("c:/Users/erick/Downloads/arenaluta.png").convert_alpha()
+fundo = pygame.image.load("arenaluta.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 def plano():
     janela.blit(fundo,(0,0))
