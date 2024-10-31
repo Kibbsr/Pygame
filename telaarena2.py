@@ -9,11 +9,11 @@ fundo = pygame.image.load("arenaluta2.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 def plano():
     janela.blit(fundo,(0,0))
-ini=True
-while ini:
+inic=True
+while inic:
     plano()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            ini=False
+            inic=False
     pygame.display.update()
 pygame.quit()
