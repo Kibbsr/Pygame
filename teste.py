@@ -28,9 +28,9 @@ class Lutador():
         dimensao_y=0
         mov=pygame.key.get_pressed()
         if mov[pygame.K_LEFT]:
-            dimensao_x=mov_velocidade
+            dimensao_x= - mov_velocidade
         elif mov[pygame.K_RIGHT]:
-            dimensao_x=-mov_velocidade
+            dimensao_x= + mov_velocidade
         self.rect.x +=dimensao_x
         self.rect.y +=dimensao_y
         if self.rect.right > largura_tela:
