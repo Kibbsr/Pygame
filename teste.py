@@ -1,8 +1,8 @@
 import pygame
 
-pygame.init()
+
 class Lutador():
-    def _init_(self,x,y):
+    def __init__(self,x,y):
 
         self.rect = pygame.Rect((x,y,50,150))
     def movimentação(self):

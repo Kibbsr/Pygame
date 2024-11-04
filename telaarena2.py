@@ -16,7 +16,7 @@ ini=True
 while ini:
     plano()
     lutador1.movimentação()
-    lutador2.movimentação()
+    lutador2.movimentação2()
     lutador1.box(janela)
     lutador2.box(janela)
     for event in pygame.event.get():
