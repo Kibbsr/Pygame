@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 class Lutador():
-    def __init__(self,x,y):
+    def _init_(self,x,y):
 
         self.rect = pygame.Rect((x,y,50,150))
     def movimentação(self):
@@ -28,4 +28,4 @@ class Lutador():
         self.rect.x +=dimensao_x
         self.rect.y +=dimensao_y
     def box(self,surface):
-        pygame.draw.rect (surface, (0,0,255), self.rect)
+        pygame.draw.rect (surface, (0,0,255),self.rect)
