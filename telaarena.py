@@ -10,8 +10,8 @@ fundo = pygame.image.load("arenaluta.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 def plano():
     janela.blit(fundo,(0,0))
-lutador1=Lutador(1000, 600)
-lutador2=Lutador(100, 600)
+lutador1=Lutador(100, 600)
+lutador2=Lutador(1000, 600)
 ini=True
 while ini:
     plano()
