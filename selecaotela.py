@@ -15,12 +15,10 @@ lutador2=Lutador(100, 600)
 ini=True
 while ini:
     plano()
-    lutador1.movimentação()
-    lutador2.movimentação2()
-    lutador1.box(janela)
-    lutador2.box(janela)
     for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            fundo = pygame.image.load("arenaluta2.png").convert_alpha()
+            fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
         if event.type == pygame.QUIT:
             ini=False
     pygame.display.update()
-pygame.quit()
