@@ -34,7 +34,11 @@ lutador1=Lutador(100, 600)
 lutador2=Lutador(1000, 600)
 ini=True
 
+clock = pygame.time.Clock()
+FPS = 120
+
 while ini:
+    clock.tick(FPS)
     plano()
     lutador1.movimentação()
     lutador2.movimentação2()
@@ -43,7 +47,9 @@ while ini:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             ini=False
+            
     pygame.display.update()
+    
 
 fim_jogo.play()
 pygame.quit()

@@ -6,7 +6,14 @@ class Lutador():
         self.rect = pygame.Rect(x, y, 50, 150)
         self.hp = 100  # HP do lutador (vida do lutador)
         self.dano = 10  # Dano do soco
+<<<<<<< HEAD
         self.ataque = False
+=======
+        self.velocidade_y = 0  # Velocidade no eixo Y
+        self.no_chao = True  # Indica se o lutador está no chão ou no ar 
+        self.gravidade = 0.3  # Intensidade da gravidade
+        self.impulso = -11  # Impulso inicial do pulo
+>>>>>>> c98ed9ab922c9c658a1df5226d9fe70140e806d0
 
     def movimentação(self):
         if self.rect.x > largura_tela:
@@ -23,16 +30,24 @@ class Lutador():
         # Obtém o estado das teclas pressionadas (True ou False)
         mov = pygame.key.get_pressed()
         
-        if mov[pygame.K_w]:
-            dimensao_y = -mov_velocidade
-        elif mov[pygame.K_s]:
-            dimensao_y = +mov_velocidade
+        if mov[pygame.K_w] and self.no_chao:
+            self.velocidade_y = self.impulso
+            self.no_chao = False
         # Verifica se a tecla 'A' foi pressionada (movimento para a esquerda)
         if mov[pygame.K_a]:
             dimensao_x = -mov_velocidade
         # Verifica se a tecla 'D' foi pressionada (movimento para a direita)
         elif mov[pygame.K_d]:
             dimensao_x = mov_velocidade
+        
+        if not self.no_chao:
+            self.velocidade_y += self.gravidade
+            self.rect.y += self.velocidade_y
+        
+        if self.rect.y >= 600:  # Supondo que a altura do chão é y = 600
+                self.rect.y = 600  # Coloca o lutador no chão
+                self.no_chao = True
+                self.velocidade_y = 0  # Zera a velocidade vertical
 
         # Atualiza a posição do lutador
         self.rect.x += dimensao_x
@@ -41,6 +56,9 @@ class Lutador():
         # Verifica se a tecla 'J' foi pressionada para dar o soco
         if mov[pygame.K_j]:
             self.soco()
+        
+    
+
 
     def movimentação2(self):
         if self.rect.x > largura_tela:
@@ -52,14 +70,24 @@ class Lutador():
         dimensao_x = 0
         dimensao_y = 0
         mov = pygame.key.get_pressed()
-        if mov[pygame.K_UP]:
-            dimensao_y = -mov_velocidade
-        if mov[pygame.K_DOWN]:
-            dimensao_y = +mov_velocidade
         if mov[pygame.K_LEFT]:
             dimensao_x = -mov_velocidade
         elif mov[pygame.K_RIGHT]:
             dimensao_x = +mov_velocidade
+        if mov[pygame.K_UP] and self.no_chao:
+            self.velocidade_y = self.impulso
+            self.no_chao = False
+
+        # Aplica a gravidade
+        if not self.no_chao:
+            self.velocidade_y += self.gravidade
+            self.rect.y += self.velocidade_y
+
+            # Verifica se o lutador atingiu o chão (simulando colisão com o solo)
+            if self.rect.y >= 600:  # Supondo que a altura do chão é y = 600
+                self.rect.y = 600  # Coloca o lutador no chão
+                self.no_chao = True
+                self.velocidade_y = 0  # Zera a velocidade vertical
 
 
         self.rect.x += dimensao_x
