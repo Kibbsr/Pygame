@@ -17,7 +17,7 @@ fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
 
 
-pulando = False
+
 
 pygame.mixer.init()
 pygame.mixer.music.load("musica1.ogg")
@@ -31,7 +31,7 @@ def plano():
 lutador1=Lutador(100, 600)
 lutador2=Lutador(1000, 600)
 ini=True
-pulando = False
+
 while ini:
     plano()
     lutador1.movimentação()
