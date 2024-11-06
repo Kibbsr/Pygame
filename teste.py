@@ -13,6 +13,7 @@ class Lutador():
         dimensao_x = 0
         dimensao_y = 0
 
+
         # Obtém o estado das teclas pressionadas (True ou False)
         mov = pygame.key.get_pressed()
         
@@ -34,6 +35,12 @@ class Lutador():
         # Verifica se a tecla 'J' foi pressionada para dar o soco
         if mov[pygame.K_j]:
             self.soco()
+
+    def gravity(self):
+        self.movy += 1.5 #velocidade de queda
+        if self.rect.y > 150 and self.movey >= 0:
+            self.movey = 0
+            self.rect.y = 150-10
 
     def movimentação2(self):
         mov_velocidade = 3

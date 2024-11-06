@@ -34,6 +34,10 @@ ini=True
 
 while ini:
     plano()
+    lutador1.gravity() #checa a gravidade
+    lutador1.update()
+    lutador2.gravity() #checa a gravidade
+    lutador2.update()
     lutador1.movimentação()
     lutador2.movimentação2()
     lutador1.box(janela)
