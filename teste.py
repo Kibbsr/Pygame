@@ -64,9 +64,36 @@ class Lutador():
         pygame.draw.rect(surface, (0, 0, 255), self.rect)  # Desenha o lutador
         pygame.draw.rect(surface, (255, 0, 0), self.soco(), 2)  # Desenha a área do soco (hitbox)
 
+    def desenhar_barra_vida(self, surface):
+        """Desenha a barra de vida do lutador na tela."""
+        # Definindo as dimensões da barra de vida
+        barra_largura = 100
+        barra_altura = 10
+        barra_x = self.rect.x  # A barra de vida será desenhada no topo do lutador
+        barra_y = self.rect.y - 20
+
+        # Desenhando o fundo da barra de vida (cinza)
+        pygame.draw.rect(surface, (169, 169, 169), (barra_x, barra_y, barra_largura, barra_altura))
+
+        # Calculando o comprimento da barra de vida de acordo com a vida restante
+        vida_restante = (self.hp / 100) * barra_largura  # Vida proporcional à largura da barra
+
+        # Desenhando a barra de vida (verde)
+        pygame.draw.rect(surface, (0, 255, 0), (barra_x, barra_y, vida_restante, barra_altura))
+
 # Função para detectar colisão entre dois lutadores
 def verificar_colisao(lutador1, lutador2):
     """Verifica se o soco de lutador1 atingiu lutador2."""
     if lutador1.soco().colliderect(lutador2.rect):  # Se o soco de lutador1 colidir com lutador2
         lutador2.aplicar_dano(lutador1.dano)  # Aplica o dano
+
+# Inicializando o Pygame
+pygame.init()
+
+largura_tela = 1550
+altura_tela = 835
+janela = pygame.display.set_mode((largura_tela, altura_tela))
+pygame.display.set_caption("Jogo de Luta")
+fundo = pygame.image.load("arenaluta2.png").convert_alpha()
+fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
