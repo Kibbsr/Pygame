@@ -11,21 +11,21 @@ fundo = pygame.image.load("arenaluta.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
 
-<<<<<<< HEAD
+
 
 
 
 
 
 pulando = False
-=======
+
 pygame.mixer.init()
 pygame.mixer.music.load("musica1.ogg")
 pygame.mixer.music.set_volume(0.4)
 
 
 pygame.mixer.music.play(loops=-1)
->>>>>>> e08a13e6d62895fe886957e902021b04517d35a3
+
 def plano():
     janela.blit(fundo,(0,0))
 lutador1=Lutador(100, 600)

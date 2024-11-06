@@ -32,10 +32,12 @@ class Lutador():
             if velocidade_y < -altura_pulo:
                 pulando = False
                 velocidade_y = altura_pulo
+        else:
+             dimensao_y = 0
 
-        elif mov[pygame.K_s]:
+        if mov[pygame.K_s]:
             dimensao_y = +mov_velocidade
-            
+
         # Verifica se a tecla 'A' foi pressionada (movimento para a esquerda)
         if mov[pygame.K_a]:
             dimensao_x = -mov_velocidade
