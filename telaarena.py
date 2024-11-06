@@ -25,24 +25,21 @@ fim_jogo = pygame.mixer.Sound("527650__fupicat__winsquare.ogg")
 pygame.mixer.music.set_volume(0.4)
 pygame.mixer.music.play(loops=-1)
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 3b3a063b584cb248dc1a683a2455f9bed43186f4
 def plano():
     janela.blit(fundo,(0,0))
 lutador1=Lutador(100, 600)
 lutador2=Lutador(1000, 600)
 ini=True
 
+clock = pygame.time.Clock()
+FPS = 120
+
 while ini:
+    clock.tick(FPS)
     plano()
-    lutador1.gravity() #checa a gravidade
-    lutador1.update()
-    lutador2.gravity() #checa a gravidade
-    lutador2.update()
     lutador1.movimentação()
     lutador2.movimentação2()
     lutador1.box(janela)
@@ -50,7 +47,9 @@ while ini:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             ini=False
+            
     pygame.display.update()
+    
 
 fim_jogo.play()
 pygame.quit()
