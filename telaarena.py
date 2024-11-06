@@ -13,8 +13,8 @@ pygame.mixer.music.load("musica1.WAV")
 pygame.mixer.music.set_volume(0.4)
 def plano():
     janela.blit(fundo,(0,0))
-lutador1=Lutador(1000, 600)
-lutador2=Lutador(100, 600)
+lutador1=Lutador(100, 600)
+lutador2=Lutador(1000, 600)
 ini=True
 while ini:
     plano()
