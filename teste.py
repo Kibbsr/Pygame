@@ -6,10 +6,14 @@ class Lutador():
         self.rect = pygame.Rect(x, y, 50, 150)
         self.hp = 100  # HP do lutador (vida do lutador)
         self.dano = 10  # Dano do soco
+
+        self.ataque = False
+
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar 
         self.gravidade = 0.3  # Intensidade da gravidade
         self.impulso = -11  # Impulso inicial do pulo
+
 
     def movimentação(self):
         if self.rect.x > largura_tela:
@@ -144,4 +148,3 @@ janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Jogo de Luta")
 fundo = pygame.image.load("arenaluta2.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
-
