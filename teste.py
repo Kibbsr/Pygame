@@ -13,7 +13,7 @@ class Lutador():
 
     def movimentação(self):
         # Define a velocidade de movimento (3 pixels por atualização)
-        mov_velocidade = 3
+        mov_velocidade = 3.5
         dimensao_x = 0
         dimensao_y = 0
 

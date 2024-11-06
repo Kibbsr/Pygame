@@ -70,8 +70,12 @@ while ini:
 # A segunda parte do código parece ser redundante e não é necessária para o jogo funcionar.
 
 # iniciando um segundo loop que não faz nada além de esperar que o evento de QUIT aconteça
+clock = pygame.time.Clock()
+FPS = 120
+
 inic = True
 while inic:
+    clock.tick(FPS)
     plano()  # Desenhando o fundo
 
     # Verificando se a janela foi fechada
