@@ -31,6 +31,7 @@ def plano():
 lutador1=Lutador(100, 600)
 lutador2=Lutador(1000, 600)
 ini=True
+pulando = False
 while ini:
     plano()
     lutador1.movimentação()

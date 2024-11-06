@@ -32,6 +32,7 @@ class Lutador():
             if velocidade_y < -altura_pulo:
                 pulando = False
                 velocidade_y = altura_pulo
+        
         else:
              dimensao_y = 0
 
