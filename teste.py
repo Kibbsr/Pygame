@@ -16,6 +16,10 @@ class Lutador():
         # Obtém o estado das teclas pressionadas (True ou False)
         mov = pygame.key.get_pressed()
 
+        if mov[pygame.K_w]:
+            dimensao_y = mov_velocidade
+        elif mov[pygame.K_s]:
+            dimensao_y = -mov_velocidade
         # Verifica se a tecla 'A' foi pressionada (movimento para a esquerda)
         if mov[pygame.K_a]:
             dimensao_x = -mov_velocidade
@@ -36,9 +40,12 @@ class Lutador():
         dimensao_x = 0
         dimensao_y = 0
         mov = pygame.key.get_pressed()
-        
+        if mov[pygame.K_UP]:
+            dimensao_y = mov_velocidade
+        if mov[pygame.K_DOWN]:
+            dimensao_y = -mov_velocidade
         if mov[pygame.K_LEFT]:
-            dimensao_x = mov_velocidade
+            dimensao_x = +mov_velocidade
         elif mov[pygame.K_RIGHT]:
             dimensao_x = -mov_velocidade
 
