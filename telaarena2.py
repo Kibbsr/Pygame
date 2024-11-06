@@ -24,6 +24,7 @@ fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
 # Função que desenha o fundo na tela
 def plano():
+
     # Blitando (desenhando) a imagem do fundo na posição (0,0) da janela
     janela.blit(fundo, (0, 0))
 
@@ -33,6 +34,12 @@ lutador2 = Lutador(100, 600)
 
 # Loop principal do jogo, responsável por controlar a execução do jogo
 ini = True
+
+janela.blit(fundo,(0,0))
+lutador1=Lutador(1300, 600)
+lutador2=Lutador(100, 600)
+ini=True
+
 while ini:
     # Desenhando o fundo da tela
     plano()
