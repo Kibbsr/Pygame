@@ -15,7 +15,7 @@ class Lutador():
 
         # Obtém o estado das teclas pressionadas (True ou False)
         mov = pygame.key.get_pressed()
-
+        
         if mov[pygame.K_w]:
             dimensao_y = -mov_velocidade
         elif mov[pygame.K_s]:
@@ -51,6 +51,9 @@ class Lutador():
 
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
+
+    
+
 
     def soco(self):
         """Método para realizar o soco e causar dano ao oponente."""
