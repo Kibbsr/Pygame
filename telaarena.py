@@ -1,6 +1,7 @@
 import pygame
 from teste import Lutador
 
+
 pygame.init()
 largura_tela = 1550
 altura_tela = 835
@@ -11,10 +12,10 @@ fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 pygame.mixer.init()
 
 
-# pygame.mixer.music.load("musica1.FLAC")
-# pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.load("musica1.FLAC")
+pygame.mixer.music.set_volume(0.4)
 
-
+pygame.mixer.music.play(loops=-1)
 def plano():
     janela.blit(fundo,(0,0))
 lutador1=Lutador(100, 600)
