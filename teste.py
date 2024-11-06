@@ -33,8 +33,8 @@ class Lutador():
                 pulando = False
                 velocidade_y = altura_pulo
         
-        else:
-             dimensao_y = 0
+        if pulando == False:
+            dimensao_y = 0
 
         if mov[pygame.K_s]:
             dimensao_y = +mov_velocidade
