@@ -1,5 +1,12 @@
 import pygame
 
+#TESTE PULO
+pulando = False
+y_gravidade = 0.2
+altura_pulo = 10
+velocidade_y = altura_pulo
+
+
 class Lutador():
     def __init__(self, x, y):
         # A posição inicial do lutador é dada pelos parâmetros (x, y)
@@ -16,10 +23,19 @@ class Lutador():
         # Obtém o estado das teclas pressionadas (True ou False)
         mov = pygame.key.get_pressed()
 
+
         if mov[pygame.K_w]:
-            dimensao_y = -mov_velocidade
+            pulando = True
+        if pulando == True:
+            dimensao_y -= velocidade_y
+            velocidade_y -= y_gravidade 
+            if velocidade_y < -altura_pulo:
+                pulando = False
+                velocidade_y = altura_pulo
+
         elif mov[pygame.K_s]:
             dimensao_y = +mov_velocidade
+            
         # Verifica se a tecla 'A' foi pressionada (movimento para a esquerda)
         if mov[pygame.K_a]:
             dimensao_x = -mov_velocidade
@@ -51,6 +67,9 @@ class Lutador():
 
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
+
+    
+
 
     def soco(self):
         """Método para realizar o soco e causar dano ao oponente."""
