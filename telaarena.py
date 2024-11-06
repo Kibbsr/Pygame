@@ -9,11 +9,12 @@ janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("")
 fundo = pygame.image.load("arenaluta.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
+
+
 pygame.mixer.init()
-
-
-pygame.mixer.music.load("musica1.FLAC")
+pygame.mixer.music.load("musica1.ogg")
 pygame.mixer.music.set_volume(0.4)
+
 
 pygame.mixer.music.play(loops=-1)
 def plano():
