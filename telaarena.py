@@ -20,12 +20,17 @@ fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
 
 pygame.mixer.init()
-pygame.mixer.music.load("musica1.ogg")
+pygame.mixer.music.load("721472__victor_natas__boss-fight.ogg")
+fim_jogo = pygame.mixer.Sound("527650__fupicat__winsquare.ogg")
 pygame.mixer.music.set_volume(0.4)
-
-
 pygame.mixer.music.play(loops=-1)
 
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> 3b3a063b584cb248dc1a683a2455f9bed43186f4
 def plano():
     janela.blit(fundo,(0,0))
 lutador1=Lutador(100, 600)
@@ -46,4 +51,6 @@ while ini:
         if event.type == pygame.QUIT:
             ini=False
     pygame.display.update()
+
+fim_jogo.play()
 pygame.quit()
