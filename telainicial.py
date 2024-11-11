@@ -1,4 +1,6 @@
 import pygame
+import subprocess
+import sys
 def inicializa():
     pygame.init()
     largura_tela = 1550
@@ -47,4 +49,12 @@ estado, janela = inicializa()
 game = True
 while game:
     desenha(janela, estado)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            game = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                subprocess.run(["python", "selecaotela.py"])
+            
     game = atualiza_estado(estado)
+pygame.quit
