@@ -22,7 +22,7 @@ class Lutador():
             self.rect.x = 0
 
         # Define a velocidade de movimento (3 pixels por atualização)
-        mov_velocidade = 3.5
+        mov_velocidade = 6.0
         dimensao_x = 0
         dimensao_y = 0
 
@@ -100,6 +100,7 @@ class Lutador():
         """Método para realizar o soco e causar dano ao oponente."""
         # Definindo a área de alcance do soco (hitbox)
         # O soco atinge 50 pixels à frente do lutador no eixo X
+        
 
         soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
         
@@ -114,7 +115,7 @@ class Lutador():
     def box(self, surface):
         """Desenha o lutador na tela."""
         pygame.draw.rect(surface, (0, 0, 255), self.rect)  # Desenha o lutador
-        pygame.draw.rect(surface, (255, 0, 0), self.soco(), 2)  # Desenha a área do soco (hitbox)
+        
 
     def desenhar_barra_vida(self, surface):
         """Desenha a barra de vida do lutador na tela."""
@@ -138,13 +139,3 @@ def verificar_colisao(lutador1, lutador2):
     """Verifica se o soco de lutador1 atingiu lutador2."""
     if lutador1.soco().colliderect(lutador2.rect):  # Se o soco de lutador1 colidir com lutador2
         lutador2.aplicar_dano(lutador1.dano)  # Aplica o dano
-
-# Inicializando o Pygame
-pygame.init()
-
-largura_tela = 1550
-altura_tela = 835
-janela = pygame.display.set_mode((largura_tela, altura_tela))
-pygame.display.set_caption("Jogo de Luta")
-fundo = pygame.image.load("arenaluta2.png").convert_alpha()
-fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
