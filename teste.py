@@ -1,17 +1,26 @@
 import pygame
-
+largura_tela = 1550
 class Lutador():
     def __init__(self, x, y):
-        # A posição inicial do lutador é dada pelos parâmetros (x, y)
+        # A posição inicials do lutador é dada pelos parâmetros (x, y)
         self.rect = pygame.Rect(x, y, 50, 150)
         self.hp = 100  # HP do lutador (vida do lutador)
         self.dano = 10  # Dano do soco
+
+        self.ataque = False
+
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar 
         self.gravidade = 0.3  # Intensidade da gravidade
         self.impulso = -11  # Impulso inicial do pulo
 
+
     def movimentação(self):
+        if self.rect.x > largura_tela:
+            self.rect.x = largura_tela
+        if self.rect.x < 0:
+            self.rect.x = 0
+
         # Define a velocidade de movimento (3 pixels por atualização)
         mov_velocidade = 3.5
         dimensao_x = 0
@@ -52,6 +61,11 @@ class Lutador():
 
 
     def movimentação2(self):
+        if self.rect.x > largura_tela:
+            self.rect.x = largura_tela
+        if self.rect.x < 0:
+            self.rect.x = 0
+
         mov_velocidade = 3
         dimensao_x = 0
         dimensao_y = 0
@@ -75,6 +89,7 @@ class Lutador():
                 self.no_chao = True
                 self.velocidade_y = 0  # Zera a velocidade vertical
 
+
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
 
@@ -85,6 +100,7 @@ class Lutador():
         """Método para realizar o soco e causar dano ao oponente."""
         # Definindo a área de alcance do soco (hitbox)
         # O soco atinge 50 pixels à frente do lutador no eixo X
+
         soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
         
         return soco_area
@@ -132,4 +148,3 @@ janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Jogo de Luta")
 fundo = pygame.image.load("arenaluta2.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
-

@@ -14,7 +14,7 @@ def inicializa():
     texto = fonte_subtitulo.render('START', True, (1, 255, 250)) # mensagem e definiçao da cor 
     titulo_pos = (1550 // 2 - 450 // 2, 100)  
     
-    pygame.mixer.music.load("")
+    pygame.mixer.music.load("721292__victor_natas__are-you-game.ogg")
     pygame.mixer.music.set_volume(0.4)
     pygame.mixer.music.play(loops=-1)
 
