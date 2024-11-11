@@ -13,7 +13,7 @@ pygame.display.set_caption("")
 fundo_menu = pygame.image.load("ARENA.png").convert()
 fundo_menu = pygame.transform.scale(fundo_menu, (largura_tela, altura_tela))
 
-fundoarena1 = pygame.image.load("arenaluta.png").convert()
+fundoarena1 = pygame.image.load("arenaluta1.png").convert()
 fundoarena1 = pygame.transform.scale(fundoarena1,(largura_tela,altura_tela))
 
 fundoarena2 = pygame.image.load("arenaluta2.png").convert()
@@ -53,6 +53,8 @@ def fase2():
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
     janela.blit(texto, (500, 700))
 
+
+
 tela_atual = 'menu'
 ini=True
 while ini:
@@ -75,12 +77,16 @@ while ini:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     subprocess.run(["python", "telaarena2.py"])
+                    pygame.quit()
+                    sys.exit()
                     
         elif tela_atual == 'Floresta':
             fase1()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     subprocess.run(["python", "telaarena.py"])
+                    pygame.quit()
+                    sys.exit()
                    
                     
         pygame.display.update()
