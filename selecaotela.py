@@ -1,5 +1,7 @@
 import pygame
 from teste import Lutador
+import subprocess
+import sys
 
 pygame.init()
 largura_tela = 1550
@@ -64,8 +66,17 @@ while ini:
             tela_menu()
         elif tela_atual == 'Gelo':
             fase2()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    subprocess.run(["python", "telaarena2.py"])
+                    
         elif tela_atual == 'Floresta':
             fase1()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    subprocess.run(["python", "telaarena.py"])
+                   
+                    
         pygame.display.update()
 pygame.quit()
         
