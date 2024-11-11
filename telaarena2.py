@@ -26,17 +26,16 @@ def plano():
 lutador1 = Lutador(1300, 600)
 lutador2 = Lutador(100, 600)
 
-# Definindo o relógio para controlar a taxa de atualização (FPS)
-clock = pygame.time.Clock()
-FPS = 120  # Frames por segundo
+# Loop principal do jogo, responsável por controlar a execução do jogo
+ini = True
 
-# Loop principal do jogo
-running = True
-while running:
-    # Controle de FPS
-    clock.tick(FPS)
+janela.blit(fundo,(0,0))
+lutador1=Lutador(1300, 600)
+lutador2=Lutador(100, 600)
+ini=True
 
-    # Limpar a tela (desenhando o fundo)
+while ini:
+    # Desenhando o fundo da tela
     plano()
 
     # Atualizando a posição dos lutadores
@@ -61,12 +60,35 @@ while running:
     for event in pygame.event.get():
         # Se o evento for o de fechar a janela, termina o loop
         if event.type == pygame.QUIT:
-            running = False
+            ini = False
 
     # Atualizando a tela para refletir as mudanças feitas
-    
+    pygame.display.update()
+
+    # Re-desenhando o fundo novamente (não é necessário, pois a função 'plano' já o desenha)
+    # janela.blit(fundo, (0, 0))  # Esta linha é redundante e pode ser removida
+
+# O segundo loop (inic) não é necessário, já que ele serve para apenas esperar e fechar o jogo,
+# mas isso já é tratado no primeiro loop. Vamos comentá-lo também.
+
+# A segunda parte do código parece ser redundante e não é necessária para o jogo funcionar.
+
+# iniciando um segundo loop que não faz nada além de esperar que o evento de QUIT aconteça
+clock = pygame.time.Clock()
+FPS = 120
+
+inic = True
+while inic:
+    clock.tick(FPS)
+    plano()  # Desenhando o fundo
+
+    # Verificando se a janela foi fechada
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            inic = False
+
+    # Atualizando a tela
     pygame.display.update()
 
 # Finalizando o Pygame quando o jogo é fechado
 pygame.quit()
-

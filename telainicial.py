@@ -1,4 +1,6 @@
 import pygame
+import subprocess
+import sys
 def inicializa():
     pygame.init()
     largura_tela = 1550
@@ -47,4 +49,21 @@ estado, janela = inicializa()
 game = True
 while game:
     desenha(janela, estado)
-    game = atualiza_estado(estado)
+
+    # Captura os eventos
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  # Quando a janela for fechada
+            game = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                pygame.mixer.music.set_volume(0.0)
+                subprocess.run(["python", "selecaotela.py"])
+                pygame.quit()
+                sys.exit()
+
+    # Atualiza a tela
+    pygame.display.update()
+
+# Finaliza o Pygame
+pygame.quit()
+sys.exit()

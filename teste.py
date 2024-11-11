@@ -30,6 +30,7 @@ class Lutador():
         if self.rect.x < 0:
             self.rect.x = 0
 
+        # Define a velocidade de movimento (3 pixels por atualização)
         mov_velocidade = 3.5
         dimensao_x = 0
         dimensao_y = 0
@@ -114,20 +115,13 @@ class Lutador():
             self.soco()
 
     def soco(self):
-        """Método para realizar o soco normal (dano 10)."""
-        if not self.ataque_ativo:
-            # Definindo a área de alcance do soco (hitbox)
-            self.soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)
-            self.ataque_ativo = True
-            self.golpe_ativo = False
+        """Método para realizar o soco e causar dano ao oponente."""
+        # Definindo a área de alcance do soco (hitbox)
+        # O soco atinge 50 pixels à frente do lutador no eixo X
 
-    def golpe_especial(self):
-        """Método para realizar o golpe especial (dano 5)."""
-        if not self.golpe_ativo:
-            # Definindo a área de alcance do golpe especial
-            self.golpe_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 40, 60)
-            self.golpe_ativo = True
-            self.ataque_ativo = False
+        soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
+        
+        return soco_area
 
     def aplicar_dano(self, dano):
         """Método para reduzir a vida (HP) do lutador."""
@@ -136,11 +130,9 @@ class Lutador():
             self.hp = 0  # Impede que a vida seja negativa
 
     def box(self, surface):
-        """Desenha a área de ataque do lutador (soco ou golpe especial)."""
-        if self.ataque_ativo:
-            pygame.draw.rect(surface, (255, 0, 0), self.soco_area, 2)  # Desenha a área do soco
-        elif self.golpe_ativo:
-            pygame.draw.rect(surface, (255, 255, 0), self.golpe_area, 2)  # Desenha a área do golpe especial
+        """Desenha o lutador na tela."""
+        pygame.draw.rect(surface, (0, 0, 255), self.rect)  # Desenha o lutador
+        pygame.draw.rect(surface, (255, 0, 0), self.soco(), 2)  # Desenha a área do soco (hitbox)
 
     def desenhar_barra_vida(self, surface):
         """Desenha a barra de vida fixada no topo da tela."""
@@ -161,12 +153,16 @@ class Lutador():
 
 # Função para detectar colisão entre dois lutadores
 def verificar_colisao(lutador1, lutador2):
-    """Verifica se o soco de lutador1 ou o golpe especial colidiu com lutador2."""
-    if lutador1.ataque_ativo and lutador1.soco_area.colliderect(lutador2.rect):
-        lutador2.aplicar_dano(lutador1.dano_soco)  # Aplica o dano do soco normal
-    elif lutador1.golpe_ativo and lutador1.golpe_area.colliderect(lutador2.rect):
-        lutador2.aplicar_dano(lutador1.dano_golpe_especial)  # Aplica o dano do golpe especial
+    """Verifica se o soco de lutador1 atingiu lutador2."""
+    if lutador1.soco().colliderect(lutador2.rect):  # Se o soco de lutador1 colidir com lutador2
+        lutador2.aplicar_dano(lutador1.dano)  # Aplica o dano
 
+# Inicializando o Pygame
+pygame.init()
 
-
-
+largura_tela = 1550
+altura_tela = 835
+janela = pygame.display.set_mode((largura_tela, altura_tela))
+pygame.display.set_caption("Jogo de Luta")
+fundo = pygame.image.load("arenaluta2.png").convert_alpha()
+fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
