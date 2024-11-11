@@ -64,7 +64,7 @@ class Lutador():
 
         # Detecta a tecla para o golpe
         if mov[pygame.K_j]:  # Golpe especial (dano 5)
-            self.golpe_especial()
+            self.socoespecial()
 
         elif mov[pygame.K_k]:  # Golpe normal (dano 10)
             self.soco()
@@ -108,10 +108,10 @@ class Lutador():
         self.rect.y += dimensao_y
 
         # Detecta a tecla para o golpe (mesmo controle de ataque)
-        if mov[pygame.K_k]:  # Golpe especial (dano 5)
-            self.golpe_especial()
+        if mov[pygame.K_1]:  # Golpe especial (dano 5)
+            self.socoespecial()
 
-        elif mov[pygame.K_j]:  # Golpe normal (dano 10)
+        elif mov[pygame.K_2]:  # Golpe normal (dano 10)
             self.soco()
 
     def soco(self):
@@ -122,6 +122,14 @@ class Lutador():
         soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
         
         return soco_area
+    def socoespecial(self):
+        """Método para realizar o soco e causar dano ao oponente."""
+        # Definindo a área de alcance do soco (hitbox)
+        # O soco atinge 50 pixels à frente do lutador no eixo X
+
+        socoespecial_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
+        
+        return socoespecial_area
 
     def aplicar_dano(self, dano):
         """Método para reduzir a vida (HP) do lutador."""

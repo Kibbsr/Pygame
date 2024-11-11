@@ -46,8 +46,8 @@ while ini:
     plano()
 
     # Atualizando a posição dos lutadores, conforme o controle do jogador
-    lutador1.movimentação()  # Lutador 1 se move usando as teclas A e D
-    lutador2.movimentação2() # Lutador 2 se move usando as teclas de seta
+    lutador1.movimentacao()  # Lutador 1 se move usando as teclas A e D
+    lutador2.movimentacao2() # Lutador 2 se move usando as teclas de seta
 
     # Desenhando os lutadores na tela, de acordo com suas posições
     lutador1.box(janela)

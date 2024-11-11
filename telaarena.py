@@ -40,8 +40,8 @@ FPS = 120
 while ini:
     clock.tick(FPS)
     plano()
-    lutador1.movimentação()
-    lutador2.movimentação2()
+    lutador1.movimentacao()
+    lutador2.movimentacao2()
     lutador1.box(janela)
     lutador2.box(janela)
     for event in pygame.event.get():
