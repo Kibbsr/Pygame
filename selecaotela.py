@@ -31,6 +31,7 @@ def tela_menu():
     janela.blit(texto, (15, 500))
     texto = fonte.render("e ENTER para selecionar!", True, (255, 255, 255))
     janela.blit(texto, (15, 550))
+    
     janela.blit(miniatura_fase2, (200, 200)) 
     janela.blit(miniatura_fase1, (950, 200)) 
 
@@ -40,13 +41,18 @@ def fase1():
     fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
     texto = fonte.render("Floresta Encantada", True, (150, 255, 150))
     janela.blit(texto, (15,10))
+    texto = fonte.render("ESC para voltar", True, (255, 255, 255))
+    janela.blit(texto, (500, 700))
     
 def fase2():
     janela.blit(fundoarena2, (0, 0))
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font(None, 74)
+    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
     texto = fonte.render("Coliseu Congelado", True, (200, 200, 255))
     janela.blit(texto, (0, 0))
+    texto = fonte.render("ESC para voltar", True, (255, 255, 255))
+    janela.blit(texto, (500, 700))
+
 tela_atual = 'menu'
 ini=True
 while ini:
