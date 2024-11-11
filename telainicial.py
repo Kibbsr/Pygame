@@ -49,12 +49,18 @@ estado, janela = inicializa()
 game = True
 while game:
     desenha(janela, estado)
+
+    # Captura os eventos
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:  # Quando a janela for fechada
             game = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 subprocess.run(["python", "selecaotela.py"])
-            
-    game = atualiza_estado(estado)
-pygame.quit
+
+    # Atualiza a tela
+    pygame.display.update()
+
+# Finaliza o Pygame
+pygame.quit()
+sys.exit()
