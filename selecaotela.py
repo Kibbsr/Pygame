@@ -17,46 +17,56 @@ fundoarena1 = pygame.transform.scale(fundoarena1,(largura_tela,altura_tela))
 fundoarena2 = pygame.image.load("arenaluta2.png").convert()
 fundoarena2 = pygame.transform.scale(fundoarena2,(largura_tela,altura_tela))
 
+miniatura_fase1 = pygame.transform.scale(fundoarena1, (400, 225))  
+miniatura_fase2 = pygame.transform.scale(fundoarena2, (400, 225))
+
 def tela_menu():
     janela.blit(fundo_menu, (0, 0))
+    
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font(None, 74)
-    texto = fonte.render("Pressione ENTER para começar", True, (255, 255, 255))
-    janela.blit(texto, (300, 400))
+    fonte = pygame.font.Font("PressStart2P-Regular.ttf", 44)
+    texto = fonte.render("Pressione A ou D para ver as fases", True, (255, 255, 255))
+    janela.blit(texto, (15, 500))
+    texto = fonte.render("e ENTER para selecionar!", True, (255, 255, 255))
+    janela.blit(texto, (15, 550))
+    janela.blit(miniatura_fase2, (200, 200)) 
+    janela.blit(miniatura_fase1, (950, 200)) 
 
 def fase1():
     janela.blit(fundoarena1, (0, 0))
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font(None, 74)
-    texto = fonte.render("Floresta Encantada", True, (255, 255, 255))
-    janela.blit(texto, (300, 400))
+    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    texto = fonte.render("Floresta Encantada", True, (150, 255, 150))
+    janela.blit(texto, (15,10))
     
 def fase2():
     janela.blit(fundoarena2, (0, 0))
     # Adicione aqui o texto ou opções de menu
     fonte = pygame.font.Font(None, 74)
-    texto = fonte.render("Coliseu Congelado", True, (255, 255, 255))
-    janela.blit(texto, (300, 400))
+    texto = fonte.render("Coliseu Congelado", True, (200, 200, 255))
+    janela.blit(texto, (0, 0))
 tela_atual = 'menu'
 ini=True
 while ini:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             ini = False
-        elif tela_atual == 'menu':
+        elif event.type == pygame.KEYDOWN:
+            if tela_atual =='menu':
+                if event.key == pygame.K_d or event.type == pygame.K_RIGHT:
+                    tela_atual = 'Floresta'
+                elif event.key == pygame.K_a or event.type == pygame.K_LEFT:
+                    tela_atual = 'Gelo'
+            elif event.key == pygame.K_ESCAPE:
+                tela_atual = 'menu'
+                    
+        if tela_atual == 'menu':
             tela_menu()
-            if event.type == pygame.KEYDOWN:
-                if tela_atual =='menu':
-                    if event.key == pygame.K_d or event.type == pygame.K_RIGHT:
-                        tela_atual = 'Floresta'
-                    elif event.type == pygame.K_a or event.type == pygame.K_LEFT:
-                        tela_atual = 'Gelo'
-    if tela_atual == 'Floresta':
-        fase1()
-    elif tela_atual == 'Gelo':
-        fase2()
-
-    pygame.display.update()
+        elif tela_atual == 'Gelo':
+            fase2()
+        elif tela_atual == 'Floresta':
+            fase1()
+        pygame.display.update()
 pygame.quit()
         
 
