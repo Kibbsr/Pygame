@@ -24,18 +24,20 @@ def tela_menu():
     janela.blit(fundo_menu, (0, 0))
     
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font(None, 74)
-    texto = fonte.render("Pressione A ou D para ver as fases e ENTER para selecionar!", True, (255, 255, 255))
-    janela.blit(texto, (300, 500))
+    fonte = pygame.font.Font("PressStart2P-Regular.ttf", 44)
+    texto = fonte.render("Pressione A ou D para ver as fases", True, (255, 255, 255))
+    janela.blit(texto, (15, 500))
+    texto = fonte.render("e ENTER para selecionar!", True, (255, 255, 255))
+    janela.blit(texto, (15, 550))
     janela.blit(miniatura_fase2, (200, 200)) 
     janela.blit(miniatura_fase1, (950, 200)) 
 
 def fase1():
     janela.blit(fundoarena1, (0, 0))
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font(None, 74)
-    texto = fonte.render("Floresta Encantada", True, (255, 255, 255))
-    janela.blit(texto, (300, 400))
+    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    texto = fonte.render("Floresta Encantada", True, (150, 255, 150))
+    janela.blit(texto, (15,10))
     
 def fase2():
     janela.blit(fundoarena2, (0, 0))
