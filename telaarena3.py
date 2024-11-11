@@ -16,7 +16,7 @@ janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("")
 
 # Carregando a imagem do fundo do jogo (provavelmente uma arena de luta)
-fundo = pygame.image.load("arenaluta3.").convert_alpha()
+fundo = pygame.image.load("arenaluta3.png").convert_alpha()
 
 # Redimensionando a imagem do fundo para que ela tenha as dimensões da janela
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
