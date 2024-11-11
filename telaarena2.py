@@ -1,35 +1,29 @@
-# Importando o módulo pygame, que é usado para criar jogos e aplicações multimídia
 import pygame
-# Importando a classe Lutador do arquivo 'teste.py'. Ela define o comportamento dos lutadores no jogo
-from teste import Lutador
+from teste import Lutador  # Importando a classe Lutador de outro arquivo (teste.py)
 
-# Inicializando o pygame, necessário para utilizar os recursos gráficos e de som do Pygame
+# Inicializando o pygame
 pygame.init()
 
-# Definindo as dimensões da tela (janela do jogo)
-largura_tela = 1550  # Largura da tela em pixels
-altura_tela = 835    # Altura da tela em pixels
+# Definindo as dimensões da tela
+largura_tela = 1550
+altura_tela = 835
 
-# Criando a janela do jogo com as dimensões especificadas
+# Criando a janela do jogo
 janela = pygame.display.set_mode((largura_tela, altura_tela))
 
-# Definindo o título da janela do jogo (não está sendo usado aqui, está vazio)
-pygame.display.set_caption("")
+# Definindo o título da janela do jogo
+pygame.display.set_caption("Jogo de Luta")
 
-# Carregando a imagem do fundo do jogo (provavelmente uma arena de luta)
+# Carregando e redimensionando o fundo
 fundo = pygame.image.load("arenaluta2.png").convert_alpha()
-
-# Redimensionando a imagem do fundo para que ela tenha as dimensões da janela
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
 # Função que desenha o fundo na tela
 def plano():
-
-    # Blitando (desenhando) a imagem do fundo na posição (0,0) da janela
     janela.blit(fundo, (0, 0))
 
-# Criando dois objetos Lutador, um na posição (1000, 600) e outro em (100, 600)
-lutador1 = Lutador(1000, 600)
+# Criando os dois lutadores
+lutador1 = Lutador(1300, 600)
 lutador2 = Lutador(100, 600)
 
 # Loop principal do jogo, responsável por controlar a execução do jogo
@@ -39,27 +33,34 @@ janela.blit(fundo,(0,0))
 lutador1=Lutador(1300, 600)
 lutador2=Lutador(100, 600)
 ini=True
-clock = pygame.time.Clock()
-FPS = 120
+
 while ini:
-    clock.tick(FPS)
     # Desenhando o fundo da tela
     plano()
 
-    # Atualizando a posição dos lutadores, conforme o controle do jogador
-    lutador1.movimentação()  # Lutador 1 se move usando as teclas A e D
-    lutador2.movimentação2() # Lutador 2 se move usando as teclas de seta
+    # Atualizando a posição dos lutadores
+    lutador1.movimentacao()  # Lutador 1 se move com as teclas A e D
+    lutador2.movimentacao2()  # Lutador 2 se move com as teclas de seta
 
-    # Desenhando os lutadores na tela, de acordo com suas posições
-    lutador1.box(janela)
-    lutador2.box(janela)
+    # Desenhando a hitbox do lutador 1 (em azul)
+    pygame.draw.rect(janela, (0, 0, 255), lutador1.rect, 2)  # Desenhando a hitbox azul do lutador 1
 
-    # Loop para verificar os eventos (interações) na janela
+    # Desenhando o soco do lutador 1, se ativo (em vermelho)
+    if lutador1.ataque_ativo:
+        pygame.draw.rect(janela, (255, 0, 0), lutador1.rect, 2)  # Desenhando a hitbox do soco em vermelho
+
+    # Desenhando a hitbox do lutador 2 (em verde)
+    pygame.draw.rect(janela, (0, 255, 0), lutador2.rect, 2)  # Desenhando a hitbox verde do lutador 2
+
+    # Desenhando o soco do lutador 2, se ativo (em laranja)
+    if lutador2.ataque_ativo:
+        pygame.draw.rect(janela, (255, 165, 0), lutador2.rect, 2)  # Desenhando a hitbox do soco em laranja
+
+    # Verificando eventos
     for event in pygame.event.get():
         # Se o evento for o de fechar a janela, termina o loop
         if event.type == pygame.QUIT:
             ini = False
-            
 
     # Atualizando a tela para refletir as mudanças feitas
     pygame.display.update()
@@ -73,3 +74,21 @@ while ini:
 # A segunda parte do código parece ser redundante e não é necessária para o jogo funcionar.
 
 # iniciando um segundo loop que não faz nada além de esperar que o evento de QUIT aconteça
+clock = pygame.time.Clock()
+FPS = 120
+
+inic = True
+while inic:
+    clock.tick(FPS)
+    plano()  # Desenhando o fundo
+
+    # Verificando se a janela foi fechada
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            inic = False
+
+    # Atualizando a tela
+    pygame.display.update()
+
+# Finalizando o Pygame quando o jogo é fechado
+pygame.quit()
