@@ -19,6 +19,9 @@ fundoarena1 = pygame.transform.scale(fundoarena1,(largura_tela,altura_tela))
 fundoarena2 = pygame.image.load("arenaluta2.png").convert()
 fundoarena2 = pygame.transform.scale(fundoarena2,(largura_tela,altura_tela))
 
+fundoarena3 = pygame.image.load("arenaluta3.png").convert()
+fundoarena3 = pygame.transform.scale(fundoarena3,(largura_tela,altura_tela))
+
 miniatura_fase1 = pygame.transform.scale(fundoarena1, (400, 225))  
 miniatura_fase2 = pygame.transform.scale(fundoarena2, (400, 225))
 
@@ -46,13 +49,19 @@ def fase1():
     
 def fase2():
     janela.blit(fundoarena2, (0, 0))
-    # Adicione aqui o texto ou opções de menu
     fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
     texto = fonte.render("Coliseu Congelado", True, (200, 200, 255))
     janela.blit(texto, (0, 0))
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
     janela.blit(texto, (500, 700))
 
+def fase3():
+    janela.blit(fundoarena3,(0,0))
+    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    texto = fonte.render("Praia Empoerada", True, (0, 200, 200))
+    janela.blit(texto, (0, 0))
+    texto = fonte.render("ESC para voltar", True, (255, 255, 255))
+    janela.blit(texto, (500, 700))
 
 
 tela_atual = 'menu'
@@ -63,10 +72,12 @@ while ini:
             ini = False
         elif event.type == pygame.KEYDOWN:
             if tela_atual =='menu':
-                if event.key == pygame.K_d or event.type == pygame.K_RIGHT:
+                if event.key == pygame.K_d:
                     tela_atual = 'Floresta'
-                elif event.key == pygame.K_a or event.type == pygame.K_LEFT:
+                elif event.key == pygame.K_a:
                     tela_atual = 'Gelo'
+                elif event.key == pygame.K_w:
+                    tela_atual = 'Praia'
             elif event.key == pygame.K_ESCAPE:
                 tela_atual = 'menu'
                     
@@ -87,6 +98,14 @@ while ini:
                     subprocess.run(["python", "telaarena.py"])
                     pygame.quit()
                     sys.exit()
+        elif tela_atual == 'Praia':
+            fase3()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    subprocess.run(["python", "telaarena3.py"])
+                    pygame.quit()
+                    sys.exit()
+                    
                    
                     
         pygame.display.update()
