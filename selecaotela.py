@@ -24,6 +24,7 @@ fundoarena3 = pygame.transform.scale(fundoarena3,(largura_tela,altura_tela))
 
 miniatura_fase1 = pygame.transform.scale(fundoarena1, (400, 225))  
 miniatura_fase2 = pygame.transform.scale(fundoarena2, (400, 225))
+miniatura_fase3 = pygame.transform.scale(fundoarena3, (400, 225))
 
 def tela_menu():
     janela.blit(fundo_menu, (0, 0))
@@ -37,6 +38,7 @@ def tela_menu():
     
     janela.blit(miniatura_fase2, (200, 200)) 
     janela.blit(miniatura_fase1, (950, 200)) 
+    janela.blit(miniatura_fase3, ((950-200), 500))
 
 def fase1():
     janela.blit(fundoarena1, (0, 0))
