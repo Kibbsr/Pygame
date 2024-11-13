@@ -24,19 +24,21 @@ fundoarena3 = pygame.transform.scale(fundoarena3,(largura_tela,altura_tela))
 
 miniatura_fase1 = pygame.transform.scale(fundoarena1, (400, 225))  
 miniatura_fase2 = pygame.transform.scale(fundoarena2, (400, 225))
+miniatura_fase3 = pygame.transform.scale(fundoarena3, (400, 225))
 
 def tela_menu():
     janela.blit(fundo_menu, (0, 0))
     
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font("PressStart2P-Regular.ttf", 44)
-    texto = fonte.render("Pressione A ou D para ver as fases", True, (255, 255, 255))
-    janela.blit(texto, (15, 500))
-    texto = fonte.render("e ENTER para selecionar!", True, (255, 255, 255))
-    janela.blit(texto, (15, 550))
+    fonte = pygame.font.Font("PressStart2P-Regular.ttf", 40)
+    texto = fonte.render("Pressione A,D ou W para ver as fases", True, (0, 0, 0))
+    janela.blit(texto, (15,25))
+    texto = fonte.render("e ENTER para selecionar!", True, (0, 0, 0))
+    janela.blit(texto, (15,80))
     
     janela.blit(miniatura_fase2, (200, 200)) 
     janela.blit(miniatura_fase1, (950, 200)) 
+    janela.blit(miniatura_fase3, ((950-375), 500))
 
 def fase1():
     janela.blit(fundoarena1, (0, 0))
