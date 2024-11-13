@@ -26,17 +26,57 @@ class Lutador:
             self.hp = 0  # Impede que a vida seja negativa
 
     def soco(self):
-        """Método para realizar o soco e causar dano ao oponente."""
-        soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
+        """Método para realizar o soco e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
+        soco_largura = 30  # Largura da hitbox do soco
+        soco_altura = 50  # Altura da hitbox do soco
+    
+        # Se o personagem está indo para a direita, a hitbox será deslocada para a esquerda
+        if self.dimensao_x > 0:
+            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe para a esquerda
+        # Se o personagem está indo para a esquerda, a hitbox será deslocada para a direita
+        elif self.dimensao_x < 0:
+            soco_area = pygame.Rect(self.rect.x - 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe para a direita
+        else:
+            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe neutro (sem movimento)
+
         return soco_area
 
     def socoespecial(self):
-        """Método para realizar o soco especial e causar dano ao oponente."""
-        socoespecial_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Golpe especial à frente do lutador
-        return socoespecial_area
+        """Método para realizar o soco especial e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
+        soco_largura = 30  # Largura da hitbox do golpe especial
+        soco_altura = 50  # Altura da hitbox do golpe especial
+
+        # Se o personagem está indo para a direita, a hitbox será deslocada para a esquerda
+        if self.dimensao_x > 0:
+            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe para a esquerda
+        # Se o personagem está indo para a esquerda, a hitbox será deslocada para a direita
+        elif self.dimensao_x < 0:
+            soco_area = pygame.Rect(self.rect.x - 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe para a direita
+        else:
+            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe neutro (sem movimento)
+
+        return soco_area
+
+
+    def socoespecial2(self):
+        """Método para realizar o soco especial e causar dano ao oponente para o Lutador 2."""
+        soco_largura = 30  # Largura da hitbox do golpe especial
+        soco_altura = 50  # Altura da hitbox do golpe especial
+
+        # Se o personagem está indo para a direita, a hitbox será à frente dele
+        if self.dimensao_x > 0:
+            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe à frente
+        # Se o personagem está indo para a esquerda, a hitbox será à esquerda dele
+        elif self.dimensao_x < 0:
+            soco_area = pygame.Rect(self.rect.x - 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe atrás
+        else:
+            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe neutro (sem movimento)
+
+        return soco_area
+
 
     def movimentacao(self):
-        """Controla os movimentos do lutador 1 (com as teclas A, D, W)"""
+        """Controla os movimentos do Lutador 1 (com as teclas A, D, W)"""
         if self.rect.x > largura_tela:
             self.rect.x = largura_tela
         if self.rect.x < 0:
@@ -48,18 +88,22 @@ class Lutador:
 
         mov = pygame.key.get_pressed()
 
-        if mov[pygame.K_a]:
+        # Movimentos horizontais
+        if mov[pygame.K_a]:  # Movimento para a esquerda
             dimensao_x = -mov_velocidade
-        elif mov[pygame.K_d]:
+        elif mov[pygame.K_d]:  # Movimento para a direita
             dimensao_x = mov_velocidade
 
+        # Movimento de pulo
         if mov[pygame.K_w] and self.no_chao:
             self.velocidade_y = self.impulso
             self.no_chao = False
 
+        # Aplica a gravidade
         if not self.no_chao:
             self.velocidade_y += self.gravidade
             self.rect.y += self.velocidade_y
+
             if self.rect.y >= 600:  # Simulando colisão com o solo
                 self.rect.y = 600
                 self.no_chao = True
@@ -68,24 +112,22 @@ class Lutador:
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
 
-        # Golpe especial com 'J', com cooldown de 3 segundos
-        if mov[pygame.K_j] and not self.golpe_ativo and (time.time(3) - self.ultimo_golpe_especial >= self.cooldown_golpe_especial):
+        self.dimensao_x = dimensao_x  # Atualiza a direção de movimento
+
+        if mov[pygame.K_k] and not self.golpe_ativo:
             self.golpe_ativo = True
-            self.ultimo_golpe_especial = time.time()  # Atualiza o tempo do último golpe especial
             self.socoespecial()
 
-        # Golpe normal com 'K'
-        elif mov[pygame.K_k] and not self.ataque_ativo:
+        elif mov[pygame.K_j] and not self.ataque_ativo:
             self.ataque_ativo = True
             self.soco()
-
         else:
             self.ataque_ativo = False
             self.golpe_ativo = False
 
 
     def movimentacao2(self):
-        """Função para movimentação do segundo lutador usando as teclas de seta"""
+        """Controla os movimentos do Lutador 2 (com as teclas de seta)"""
         if self.rect.x > largura_tela:
             self.rect.x = largura_tela
         if self.rect.x < 0:
@@ -97,18 +139,22 @@ class Lutador:
 
         mov = pygame.key.get_pressed()
 
-        if mov[pygame.K_LEFT]:
+        # Movimentos horizontais (setas)
+        if mov[pygame.K_LEFT]:  # Movimento para a esquerda
             dimensao_x = -mov_velocidade
-        elif mov[pygame.K_RIGHT]:
+        elif mov[pygame.K_RIGHT]:  # Movimento para a direita
             dimensao_x = mov_velocidade
 
+        # Movimento de pulo (seta para cima)
         if mov[pygame.K_UP] and self.no_chao:
             self.velocidade_y = self.impulso
             self.no_chao = False
 
+        # Aplica a gravidade
         if not self.no_chao:
             self.velocidade_y += self.gravidade
             self.rect.y += self.velocidade_y
+
             if self.rect.y >= 600:  # Simulando colisão com o solo
                 self.rect.y = 600
                 self.no_chao = True
@@ -117,20 +163,23 @@ class Lutador:
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
 
-    # Golpe especial com '1', com cooldown de 3 segundos
-        if mov[pygame.K_1] and not self.golpe_ativo and (time.time() - self.ultimo_golpe_especial >= self.cooldown_golpe_especial):
+        self.dimensao_x = dimensao_x  # Atualiza a direção de movimento do lutador 2
+
+        # Golpe especial com '1', com cooldown de 3 segundos
+        if mov[pygame.K_2] and not self.golpe_ativo:
             self.golpe_ativo = True
             self.ultimo_golpe_especial = time.time()  # Atualiza o tempo do último golpe especial
-            self.socoespecial()
+            self.socoespecial2()
 
-    # Golpe normal com '2'
-        elif mov[pygame.K_2] and not self.ataque_ativo:
+        # Golpe normal com '2'
+        elif mov[pygame.K_1] and not self.ataque_ativo:
             self.ataque_ativo = True
-            self.soco()
+            self.soco2()
 
         else:
             self.ataque_ativo = False
             self.golpe_ativo = False
+
 
 
     def box(self, surface):
