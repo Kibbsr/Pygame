@@ -1,5 +1,6 @@
 import pygame
-from teste import Lutador  # Importando a classe Lutador de outro arquivo (teste.py)
+from teste import Lutador  # Certifique-se de que a classe Lutador está definida corretamente
+
 
 # Função para detectar colisão entre dois lutadores
 def verificar_colisao(lutador1, lutador2):
@@ -27,40 +28,33 @@ def verificar_colisao(lutador1, lutador2):
             lutador1.aplicar_dano(lutador2.dano_golpe_especial)  # Aplica 5 de dano
             lutador2.golpe_ativo = False  # Desativa o golpe especial após causar dano
 
-# Inicializando o pygame
-pygame.init()
 
-# Definindo as dimensões da tela
+
+pygame.init()
 largura_tela = 1550
 altura_tela = 835
-
-# Criando a janela do jogo
 janela = pygame.display.set_mode((largura_tela, altura_tela))
-
-# Definindo o título da janela do jogo
-pygame.display.set_caption("Jogo de Luta")
-
-# Carregando e redimensionando o fundo
-fundo = pygame.image.load("arenaluta2.png").convert_alpha()
+pygame.display.set_caption("Luta")
+fundo = pygame.image.load("arena4.jpg").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
-# Função que desenha o fundo na tela
+pygame.mixer.init()
+pygame.mixer.music.load("721472__victor_natas__boss-fight.ogg")
+fim_jogo = pygame.mixer.Sound("527650__fupicat__winsquare.ogg")
+pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.play(loops=-1)
+
 def plano():
     janela.blit(fundo, (0, 0))
 
-# Criando os dois lutadores
-lutador1 = Lutador(1300, 600)
-lutador2 = Lutador(100, 600)
-
-# Loop principal do jogo, responsável por controlar a execução do jogo
+# Instanciando os lutadores
+lutador1 = Lutador(100, 600)
+lutador2 = Lutador(1000, 600)
 ini = True
 
-janela.blit(fundo,(0,0))
-lutador1=Lutador(1300, 600)
-lutador2=Lutador(100, 600)
-ini=True
 clock = pygame.time.Clock()
 FPS = 120
+
 while ini:
     clock.tick(FPS)
     plano()  # Desenha o fundo
@@ -71,6 +65,7 @@ while ini:
 
     # Verificar colisões entre os dois lutadores
     verificar_colisao(lutador1, lutador2)
+
     # Desenho da barra de vida para o lutador1
     barra_largura = 250
     barra_altura = 50
@@ -93,5 +88,7 @@ while ini:
 
     pygame.display.update()  # Atualiza a tela
 
-
+fim_jogo.play()  # Som de fim de jogo (caso aplicável)
 pygame.quit()  # Finaliza o Pygame
+
+
