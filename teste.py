@@ -5,11 +5,10 @@ altura_tela = 835
 
 class Lutador():
     def __init__(self, x, y):
-        self.rect = pygame.Rect(x, y, 100, 150)  # Rect representa o tamanho e posição do lutador
+        self.rect = pygame.Rect(x, y, 100, 150)
         self.hp = 100  # HP do lutador
-        self.dano_soco = 5 # Dano do soco normal
-        self.dano_golpe_especial = 10 # Dano do golpe especial (tecla J)
-
+        self.dano_soco = 0.2
+        self.dano_golpe_especial = 1
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar
         self.gravidade = 0.3  # Intensidade da gravidade
@@ -18,10 +17,13 @@ class Lutador():
         # Flag para controlar se os golpes estão sendo usados
         self.ataque_ativo = False
         self.golpe_ativo = False
-
-        # Áreas de golpe
-        self.soco_area = pygame.Rect(0, 0, 0, 0)
-        self.golpe_area = pygame.Rect(0, 0, 0, 0)
+        # outros atributos...
+    
+    def aplicar_dano(self, dano):
+        """Método para reduzir a vida (HP) do lutador."""
+        self.hp -= dano
+        if self.hp < 0:
+            self.hp = 0 
     def soco(self):
         """Método para realizar o soco e causar dano ao oponente."""
         # Definindo a área de alcance do soco (hitbox)
@@ -39,6 +41,8 @@ class Lutador():
         
         return socoespecial_area
 
+    # Atualizando a função de movimentação para garantir que o golpe só cause dano uma vez
+
     def movimentacao(self):
         """Controla os movimentos do lutador 1 (com as teclas A, D, W)"""
         if self.rect.x > largura_tela:
@@ -46,30 +50,24 @@ class Lutador():
         if self.rect.x < 0:
             self.rect.x = 0
 
-    # Define a velocidade de movimento (3 pixels por atualização)
         mov_velocidade = 3.5
         dimensao_x = 0
         dimensao_y = 0
 
-    # Obtém o estado das teclas pressionadas (True ou False)
         mov = pygame.key.get_pressed()
 
-    # Movimentos horizontais
         if mov[pygame.K_a]:
             dimensao_x = -mov_velocidade
         elif mov[pygame.K_d]:
             dimensao_x = mov_velocidade
 
-    # Movimento de pulo
         if mov[pygame.K_w] and self.no_chao:
             self.velocidade_y = self.impulso
             self.no_chao = False
 
-    # Aplica a gravidade
         if not self.no_chao:
             self.velocidade_y += self.gravidade
             self.rect.y += self.velocidade_y
-
             if self.rect.y >= 600:  # Simulando colisão com o solo
                 self.rect.y = 600
                 self.no_chao = True
@@ -78,15 +76,20 @@ class Lutador():
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
 
-    # Detecta a tecla para o golpe
-        if mov[pygame.K_j]:  # Golpe especial (dano 10)
-            self.ataque_ativo = True
+        # Golpe especial com 'J'
+        if mov[pygame.K_k] and not self.golpe_ativo:  # Golpe especial (dano 5)
+            self.golpe_ativo = True
             self.socoespecial()
-        elif mov[pygame.K_k]:  # Golpe normal (dano 5)
+
+    # Golpe normal com 'K'
+        elif mov[pygame.K_j] and not self.ataque_ativo:  # Golpe normal (dano 2)
             self.ataque_ativo = True
             self.soco()
+
         else:
-            self.ataque_ativo = False  # Desativa o ataque quando não houver tecla pressionada
+            self.ataque_ativo = False
+            self.golpe_ativo = False
+
 
 
     def movimentacao2(self):
@@ -100,25 +103,20 @@ class Lutador():
         dimensao_x = 0
         dimensao_y = 0
 
-        # Obtém o estado das teclas pressionadas (True ou False) para as setas
         mov = pygame.key.get_pressed()
 
-    # Movimentos horizontais (setas)
         if mov[pygame.K_LEFT]:
             dimensao_x = -mov_velocidade
         elif mov[pygame.K_RIGHT]:
             dimensao_x = mov_velocidade
 
-    # Movimento de pulo (seta para cima)
         if mov[pygame.K_UP] and self.no_chao:
             self.velocidade_y = self.impulso
             self.no_chao = False
 
-    # Aplica a gravidade
         if not self.no_chao:
             self.velocidade_y += self.gravidade
             self.rect.y += self.velocidade_y
-
             if self.rect.y >= 600:  # Simulando colisão com o solo
                 self.rect.y = 600
                 self.no_chao = True
@@ -127,23 +125,20 @@ class Lutador():
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
 
-    # Detecta a tecla para o golpe (mesmo controle de ataque)
-        if mov[pygame.K_1]:  # Golpe especial (dano 10)
-            self.ataque_ativo = True
+        # Golpe especial com '1'
+        if mov[pygame.K_1] and not self.golpe_ativo:  # Golpe especial (dano 5)
+            self.golpe_ativo = True
             self.socoespecial()
-        elif mov[pygame.K_2]:  # Golpe normal (dano 5)
+
+        # Golpe normal com '2'
+        elif mov[pygame.K_2] and not self.ataque_ativo:  # Golpe normal (dano 2)
             self.ataque_ativo = True
             self.soco()
+
         else:
-            self.ataque_ativo = False  # Desativa o ataque quando não houver tecla pressionada
+            self.ataque_ativo = False
+            self.golpe_ativo = False
 
-
-
-    def aplicar_dano(self, dano):
-        """Método para reduzir a vida (HP) do lutador."""
-        self.hp -= dano
-        if self.hp < 0:
-            self.hp = 0  # Impede que a vida seja negativa
 
     def box(self, surface):
         """Desenha o lutador na tela."""
