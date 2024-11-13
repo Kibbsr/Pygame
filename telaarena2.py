@@ -1,6 +1,25 @@
 import pygame
 from teste import Lutador  # Importando a classe Lutador de outro arquivo (teste.py)
 
+
+
+# Função para detectar colisão entre dois lutadores
+def verificar_colisao(lutador1, lutador2):
+    """Verifica se o golpe de lutador1 atingiu lutador2, só causando dano se o golpe estiver ativo."""
+    
+    # Verificar se lutador1 está atacando
+    if lutador1.ataque_ativo:
+        if lutador1.soco().colliderect(lutador2.rect):  # Colisão com o soco
+            lutador2.aplicar_dano(lutador1.dano_soco)
+        if lutador1.socoespecial().colliderect(lutador2.rect):  # Colisão com o golpe especial
+            lutador2.aplicar_dano(lutador1.dano_golpe_especial)
+    
+    # Verificar se lutador2 está atacando
+    if lutador2.ataque_ativo:
+        if lutador2.soco().colliderect(lutador1.rect):  # Colisão com o soco de lutador2
+            lutador1.aplicar_dano(lutador2.dano_soco)
+        if lutador2.socoespecial().colliderect(lutador1.rect):  # Colisão com o golpe especial de lutador2
+            lutador1.aplicar_dano(lutador2.dano_golpe_especial)
 # Inicializando o pygame
 pygame.init()
 
