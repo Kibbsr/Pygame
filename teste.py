@@ -69,7 +69,7 @@ class Lutador:
         self.rect.y += dimensao_y
 
         # Golpe especial com 'J', com cooldown de 3 segundos
-        if mov[pygame.K_j] and not self.golpe_ativo and (time.time() - self.ultimo_golpe_especial >= self.cooldown_golpe_especial):
+        if mov[pygame.K_j] and not self.golpe_ativo and (time.time(3) - self.ultimo_golpe_especial >= self.cooldown_golpe_especial):
             self.golpe_ativo = True
             self.ultimo_golpe_especial = time.time()  # Atualiza o tempo do último golpe especial
             self.socoespecial()
