@@ -1,8 +1,6 @@
 import pygame
 from teste import Lutador  # Importando a classe Lutador de outro arquivo (teste.py)
 
-
-
 # Função para detectar colisão entre dois lutadores
 def verificar_colisao(lutador1, lutador2):
     """Verifica se o golpe de lutador1 atingiu lutador2, só causando dano se o golpe estiver ativo."""
@@ -62,6 +60,8 @@ while ini:
     lutador1.box(janela)  # Desenha o lutador1
     lutador2.box(janela)  # Desenha o lutador2
 
+    # Verificar colisões entre os dois lutadores
+    verificar_colisao(lutador1, lutador2)
     # Desenho da barra de vida para o lutador1
     barra_largura = 250
     barra_altura = 50

@@ -68,6 +68,8 @@ while ini:
     lutador1.box(janela)  # Desenha o lutador1
     lutador2.box(janela)  # Desenha o lutador2
 
+    # Verificar colisões entre os dois lutadores
+    verificar_colisao(lutador1, lutador2)
     # Desenho da barra de vida para o lutador1
     barra_largura = 250
     barra_altura = 50
