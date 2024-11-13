@@ -22,9 +22,13 @@ fundoarena2 = pygame.transform.scale(fundoarena2,(largura_tela,altura_tela))
 fundoarena3 = pygame.image.load("arenaluta3.png").convert()
 fundoarena3 = pygame.transform.scale(fundoarena3,(largura_tela,altura_tela))
 
+fundoarena4 = pygame.image.load("arena4.jpg").convert()
+fundoarena4 = pygame.transform.scale(fundoarena4,(largura_tela,altura_tela))
+
 miniatura_fase1 = pygame.transform.scale(fundoarena1, (400, 225))  
 miniatura_fase2 = pygame.transform.scale(fundoarena2, (400, 225))
 miniatura_fase3 = pygame.transform.scale(fundoarena3, (400, 225))
+miniatura_fase4 = pygame.transform.scale(fundoarena4, (400, 225))
 
 def tela_menu():
     janela.blit(fundo_menu, (0, 0))
@@ -36,15 +40,16 @@ def tela_menu():
     texto = fonte.render("e ENTER para selecionar!", True, (0, 0, 0))
     janela.blit(texto, (15,80))
     
-    janela.blit(miniatura_fase2, (200, 200)) 
-    janela.blit(miniatura_fase1, (950, 200)) 
-    janela.blit(miniatura_fase3, ((950-375), 500))
+    janela.blit(miniatura_fase2, (100, 200)) 
+    janela.blit(miniatura_fase1, (1050, 200)) 
+    janela.blit(miniatura_fase3, ((950-375), 450))
+    janela.blit(miniatura_fase4, ((950-375), 150))
 
 def fase1():
     janela.blit(fundoarena1, (0, 0))
     # Adicione aqui o texto ou opções de menu
     fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
-    texto = fonte.render("Floresta Encantada", True, (150, 255, 150))
+    texto = fonte.render("Floresta Perdida", True, (150, 255, 150))
     janela.blit(texto, (15,10))
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
     janela.blit(texto, (500, 700))
@@ -65,6 +70,13 @@ def fase3():
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
     janela.blit(texto, (500, 700))
 
+def fase4():
+    janela.blit(fundoarena4,(0,0))
+    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    texto = fonte.render("Depostio Encantado", True, (255, 0, 200))
+    janela.blit(texto, (0, 0))
+    texto = fonte.render("ESC para voltar", True, (255, 255, 255))
+    janela.blit(texto, (500, 700))
 
 tela_atual = 'menu'
 ini=True
@@ -80,6 +92,8 @@ while ini:
                     tela_atual = 'Gelo'
                 elif event.key == pygame.K_w:
                     tela_atual = 'Praia'
+                elif event.key == pygame.K_s:
+                    tela_atual = 'Deposito'
             elif event.key == pygame.K_ESCAPE:
                 tela_atual = 'menu'
                     
@@ -100,11 +114,20 @@ while ini:
                     subprocess.run(["python", "telaarena.py"])
                     pygame.quit()
                     sys.exit()
+
         elif tela_atual == 'Praia':
             fase3()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     subprocess.run(["python", "telaarena3.py"])
+                    pygame.quit()
+                    sys.exit()
+
+        elif tela_atual == 'Deposito':
+            fase4()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    subprocess.run(["python", "telaarena4.py"])
                     pygame.quit()
                     sys.exit()
                     
