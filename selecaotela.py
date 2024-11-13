@@ -34,7 +34,7 @@ def tela_menu():
     janela.blit(fundo_menu, (0, 0))
     
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font("PressStart2P-Regular.ttf", 40)
+    fonte = pygame.font.Font("Play-Regular.ttf", 40)
     texto = fonte.render("Pressione A,D ou W para ver as fases", True, (0, 0, 0))
     janela.blit(texto, (15,25))
     texto = fonte.render("e ENTER para selecionar!", True, (0, 0, 0))
@@ -48,7 +48,7 @@ def tela_menu():
 def fase1():
     janela.blit(fundoarena1, (0, 0))
     # Adicione aqui o texto ou opções de menu
-    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    fonte = pygame.font.Font('Play-Regular.ttf', 44)
     texto = fonte.render("Floresta Perdida", True, (150, 255, 150))
     janela.blit(texto, (15,10))
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
@@ -56,7 +56,7 @@ def fase1():
     
 def fase2():
     janela.blit(fundoarena2, (0, 0))
-    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    fonte = pygame.font.Font('Play-Regular.ttf', 44)
     texto = fonte.render("Coliseu Congelado", True, (200, 200, 255))
     janela.blit(texto, (0, 0))
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
@@ -64,7 +64,7 @@ def fase2():
 
 def fase3():
     janela.blit(fundoarena3,(0,0))
-    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    fonte = pygame.font.Font('Play-Regular.ttf', 44)
     texto = fonte.render("Praia Empoerada", True, (0, 200, 200))
     janela.blit(texto, (0, 0))
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
@@ -72,7 +72,7 @@ def fase3():
 
 def fase4():
     janela.blit(fundoarena4,(0,0))
-    fonte = pygame.font.Font('PressStart2P-Regular.ttf', 44)
+    fonte = pygame.font.Font('Play-Regular.ttf', 44)
     texto = fonte.render("Depostio Encantado", True, (255, 0, 200))
     janela.blit(texto, (0, 0))
     texto = fonte.render("ESC para voltar", True, (255, 255, 255))
