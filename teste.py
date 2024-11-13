@@ -1,47 +1,39 @@
 import pygame
-
+import time  # Para controlar o cooldown
 largura_tela = 1550
-altura_tela = 835
-
-class Lutador():
+altura_tela=835
+class Lutador:
     def __init__(self, x, y):
         self.rect = pygame.Rect(x, y, 100, 150)
-        self.hp = 100  # HP do lutador
-        self.dano_soco = 0.2
-        self.dano_golpe_especial = 1
+        self.hp = 100  # HP inicial do lutador
+        self.dano_soco = 0.2  # Dano do soco
+        self.dano_golpe_especial = 0.10  # Dano do golpe especial
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar
         self.gravidade = 0.3  # Intensidade da gravidade
         self.impulso = -11  # Impulso inicial do pulo
+        self.ataque_ativo = False  # Flag para controle de ataque
+        self.golpe_ativo = False  # Flag para controle de golpe especial
 
-        # Flag para controlar se os golpes estão sendo usados
-        self.ataque_ativo = False
-        self.golpe_ativo = False
-        # outros atributos...
+        # Variáveis de cooldown
+        self.ultimo_golpe_especial = 0  # Armazena o último tempo em que o golpe especial foi usado
+        self.cooldown_golpe_especial = 3  # Tempo de cooldown (3 segundos)
     
     def aplicar_dano(self, dano):
         """Método para reduzir a vida (HP) do lutador."""
         self.hp -= dano
         if self.hp < 0:
-            self.hp = 0 
+            self.hp = 0  # Impede que a vida seja negativa
+
     def soco(self):
         """Método para realizar o soco e causar dano ao oponente."""
-        # Definindo a área de alcance do soco (hitbox)
-        # O soco atinge 50 pixels à frente do lutador no eixo X
-
         soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
-        
         return soco_area
+
     def socoespecial(self):
-        """Método para realizar o soco e causar dano ao oponente."""
-        # Definindo a área de alcance do soco (hitbox)
-        # O soco atinge 50 pixels à frente do lutador no eixo X
-
-        socoespecial_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Soco à frente do lutador
-        
+        """Método para realizar o soco especial e causar dano ao oponente."""
+        socoespecial_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, 30, 50)  # Golpe especial à frente do lutador
         return socoespecial_area
-
-    # Atualizando a função de movimentação para garantir que o golpe só cause dano uma vez
 
     def movimentacao(self):
         """Controla os movimentos do lutador 1 (com as teclas A, D, W)"""
@@ -76,20 +68,20 @@ class Lutador():
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
 
-        # Golpe especial com 'J'
-        if mov[pygame.K_k] and not self.golpe_ativo:  # Golpe especial (dano 5)
+        # Golpe especial com 'J', com cooldown de 3 segundos
+        if mov[pygame.K_j] and not self.golpe_ativo and (time.time() - self.ultimo_golpe_especial >= self.cooldown_golpe_especial):
             self.golpe_ativo = True
+            self.ultimo_golpe_especial = time.time()  # Atualiza o tempo do último golpe especial
             self.socoespecial()
 
-    # Golpe normal com 'K'
-        elif mov[pygame.K_j] and not self.ataque_ativo:  # Golpe normal (dano 2)
+        # Golpe normal com 'K'
+        elif mov[pygame.K_k] and not self.ataque_ativo:
             self.ataque_ativo = True
             self.soco()
 
         else:
             self.ataque_ativo = False
             self.golpe_ativo = False
-
 
 
     def movimentacao2(self):
@@ -125,13 +117,14 @@ class Lutador():
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
 
-        # Golpe especial com '1'
-        if mov[pygame.K_1] and not self.golpe_ativo:  # Golpe especial (dano 5)
+    # Golpe especial com '1', com cooldown de 3 segundos
+        if mov[pygame.K_1] and not self.golpe_ativo and (time.time() - self.ultimo_golpe_especial >= self.cooldown_golpe_especial):
             self.golpe_ativo = True
+            self.ultimo_golpe_especial = time.time()  # Atualiza o tempo do último golpe especial
             self.socoespecial()
 
-        # Golpe normal com '2'
-        elif mov[pygame.K_2] and not self.ataque_ativo:  # Golpe normal (dano 2)
+    # Golpe normal com '2'
+        elif mov[pygame.K_2] and not self.ataque_ativo:
             self.ataque_ativo = True
             self.soco()
 
