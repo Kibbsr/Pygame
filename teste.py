@@ -7,7 +7,7 @@ class Lutador:
         self.rect = pygame.Rect(x, y, 100, 150)
         self.hp = 100  # HP inicial do lutador
         self.dano_soco = 0.2  # Dano do soco
-        self.dano_golpe_especial = 0.10  # Dano do golpe especial
+        self.dano_golpe_especial = 1  # Dano do golpe especial
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar
         self.gravidade = 0.3  # Intensidade da gravidade
