@@ -4,20 +4,29 @@ from teste import Lutador  # Importando a classe Lutador de outro arquivo (teste
 # Função para detectar colisão entre dois lutadores
 def verificar_colisao(lutador1, lutador2):
     """Verifica se o golpe de lutador1 atingiu lutador2, só causando dano se o golpe estiver ativo."""
-    
-    # Verificar se lutador1 está atacando
+
+    # Verificar se lutador1 está atacando (golpe normal ou especial)
     if lutador1.ataque_ativo:
         if lutador1.soco().colliderect(lutador2.rect):  # Colisão com o soco
-            lutador2.aplicar_dano(lutador1.dano_soco)
+            lutador2.aplicar_dano(lutador1.dano_soco)  # Aplica 2 de dano
+            lutador1.ataque_ativo = False  # Desativa o ataque após causar dano
+
+    if lutador1.golpe_ativo:
         if lutador1.socoespecial().colliderect(lutador2.rect):  # Colisão com o golpe especial
-            lutador2.aplicar_dano(lutador1.dano_golpe_especial)
-    
-    # Verificar se lutador2 está atacando
+            lutador2.aplicar_dano(lutador1.dano_golpe_especial)  # Aplica 5 de dano
+            lutador1.golpe_ativo = False  # Desativa o golpe especial após causar dano
+
+    # Verificar se lutador2 está atacando (golpe normal ou especial)
     if lutador2.ataque_ativo:
         if lutador2.soco().colliderect(lutador1.rect):  # Colisão com o soco de lutador2
-            lutador1.aplicar_dano(lutador2.dano_soco)
+            lutador1.aplicar_dano(lutador2.dano_soco)  # Aplica 2 de dano
+            lutador2.ataque_ativo = False  # Desativa o ataque após causar dano
+
+    if lutador2.golpe_ativo:
         if lutador2.socoespecial().colliderect(lutador1.rect):  # Colisão com o golpe especial de lutador2
-            lutador1.aplicar_dano(lutador2.dano_golpe_especial)
+            lutador1.aplicar_dano(lutador2.dano_golpe_especial)  # Aplica 5 de dano
+            lutador2.golpe_ativo = False  # Desativa o golpe especial após causar dano
+
 # Inicializando o pygame
 pygame.init()
 
