@@ -33,62 +33,37 @@ janela.blit(fundo,(0,0))
 lutador1=Lutador(1300, 600)
 lutador2=Lutador(100, 600)
 ini=True
-
+clock = pygame.time.Clock()
+FPS = 120
 while ini:
-    # Desenhando o fundo da tela
-    plano()
+    clock.tick(FPS)
+    plano()  # Desenha o fundo
+    lutador1.movimentacao()  # Movimenta o lutador1
+    lutador2.movimentacao2()  # Movimenta o lutador2
+    lutador1.box(janela)  # Desenha o lutador1
+    lutador2.box(janela)  # Desenha o lutador2
 
-    # Atualizando a posição dos lutadores
-    lutador1.movimentacao()  # Lutador 1 se move com as teclas A e D
-    lutador2.movimentacao2()  # Lutador 2 se move com as teclas de seta
+    # Desenho da barra de vida para o lutador1
+    barra_largura = 250
+    barra_altura = 50
+    barra_x = 15
+    barra_y = 20
+    vida_restante1 = (lutador1.hp / 100) * barra_largura
+    pygame.draw.rect(janela, (169, 169, 169), pygame.Rect([barra_x, barra_y], [barra_largura, barra_altura]))
+    pygame.draw.rect(janela, (0, 255, 0), pygame.Rect(barra_x, barra_y, vida_restante1, barra_altura))
 
-    # Desenhando a hitbox do lutador 1 (em azul)
-    pygame.draw.rect(janela, (0, 0, 255), lutador1.rect, 2)  # Desenhando a hitbox azul do lutador 1
+    # Desenho da barra de vida para o lutador2
+    barra_x2 = 1280
+    barra_y2 = 20
+    vida_restante2 = (lutador2.hp / 100) * barra_largura
+    pygame.draw.rect(janela, (169, 169, 169), pygame.Rect([barra_x2, barra_y2], [barra_largura, barra_altura]))
+    pygame.draw.rect(janela, (0, 255, 0), pygame.Rect(barra_x2, barra_y2, vida_restante2, barra_altura))
 
-    # Desenhando o soco do lutador 1, se ativo (em vermelho)
-    if lutador1.ataque_ativo:
-        pygame.draw.rect(janela, (255, 0, 0), lutador1.rect, 2)  # Desenhando a hitbox do soco em vermelho
-
-    # Desenhando a hitbox do lutador 2 (em verde)
-    pygame.draw.rect(janela, (0, 255, 0), lutador2.rect, 2)  # Desenhando a hitbox verde do lutador 2
-
-    # Desenhando o soco do lutador 2, se ativo (em laranja)
-    if lutador2.ataque_ativo:
-        pygame.draw.rect(janela, (255, 165, 0), lutador2.rect, 2)  # Desenhando a hitbox do soco em laranja
-
-    # Verificando eventos
     for event in pygame.event.get():
-        # Se o evento for o de fechar a janela, termina o loop
         if event.type == pygame.QUIT:
             ini = False
 
-    # Atualizando a tela para refletir as mudanças feitas
-    pygame.display.update()
+    pygame.display.update()  # Atualiza a tela
 
-    # Re-desenhando o fundo novamente (não é necessário, pois a função 'plano' já o desenha)
-    # janela.blit(fundo, (0, 0))  # Esta linha é redundante e pode ser removida
 
-# O segundo loop (inic) não é necessário, já que ele serve para apenas esperar e fechar o jogo,
-# mas isso já é tratado no primeiro loop. Vamos comentá-lo também.
-
-# A segunda parte do código parece ser redundante e não é necessária para o jogo funcionar.
-
-# iniciando um segundo loop que não faz nada além de esperar que o evento de QUIT aconteça
-clock = pygame.time.Clock()
-FPS = 120
-
-inic = True
-while inic:
-    clock.tick(FPS)
-    plano()  # Desenhando o fundo
-
-    # Verificando se a janela foi fechada
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            inic = False
-
-    # Atualizando a tela
-    pygame.display.update()
-
-# Finalizando o Pygame quando o jogo é fechado
-pygame.quit()
+pygame.quit()  # Finaliza o Pygame

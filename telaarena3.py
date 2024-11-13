@@ -42,23 +42,34 @@ clock = pygame.time.Clock()
 FPS = 120
 while ini:
     clock.tick(FPS)
-    # Desenhando o fundo da tela
-    plano()
+    plano()  # Desenha o fundo
+    lutador1.movimentacao()  # Movimenta o lutador1
+    lutador2.movimentacao2()  # Movimenta o lutador2
+    lutador1.box(janela)  # Desenha o lutador1
+    lutador2.box(janela)  # Desenha o lutador2
 
-    # Atualizando a posição dos lutadores, conforme o controle do jogador
-    lutador1.movimentacao()  # Lutador 1 se move usando as teclas A e D
-    lutador2.movimentacao2() # Lutador 2 se move usando as teclas de seta
+    # Desenho da barra de vida para o lutador1
+    barra_largura = 250
+    barra_altura = 50
+    barra_x = 15
+    barra_y = 20
+    vida_restante1 = (lutador1.hp / 100) * barra_largura
+    pygame.draw.rect(janela, (169, 169, 169), pygame.Rect([barra_x, barra_y], [barra_largura, barra_altura]))
+    pygame.draw.rect(janela, (0, 255, 0), pygame.Rect(barra_x, barra_y, vida_restante1, barra_altura))
 
-    # Desenhando os lutadores na tela, de acordo com suas posições
-    lutador1.box(janela)
-    lutador2.box(janela)
+    # Desenho da barra de vida para o lutador2
+    barra_x2 = 1280
+    barra_y2 = 20
+    vida_restante2 = (lutador2.hp / 100) * barra_largura
+    pygame.draw.rect(janela, (169, 169, 169), pygame.Rect([barra_x2, barra_y2], [barra_largura, barra_altura]))
+    pygame.draw.rect(janela, (0, 255, 0), pygame.Rect(barra_x2, barra_y2, vida_restante2, barra_altura))
 
-    # Loop para verificar os eventos (interações) na janela
     for event in pygame.event.get():
-        # Se o evento for o de fechar a janela, termina o loop
         if event.type == pygame.QUIT:
             ini = False
-            
 
-    # Atualizando a tela para refletir as mudanças feitas
-    pygame.display.update()
+    pygame.display.update()  # Atualiza a tela
+
+
+pygame.quit()  # Finaliza o Pygame
+
