@@ -1,6 +1,7 @@
 import pygame
 from teste import Lutador  # Certifique-se de que a classe Lutador está definida corretamente
 
+
 # Função para detectar colisão entre dois lutadores
 def verificar_colisao(lutador1, lutador2):
     """Verifica se o golpe de lutador1 atingiu lutador2, só causando dano se o golpe estiver ativo."""
