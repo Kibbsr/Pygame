@@ -1,23 +1,21 @@
 import pygame
-import time  # Para controlar o cooldown
+
+# Definições de tela
 largura_tela = 1550
-altura_tela=835
+altura_tela = 835
+
 class Lutador:
     def __init__(self, x, y):
         self.rect = pygame.Rect(x, y, 100, 150)
         self.hp = 100  # HP inicial do lutador
         self.dano_soco = 0.2  # Dano do soco
-        self.dano_golpe_especial = 1  # Dano do golpe especial
+        self.dano_chute = 0.5  # Dano do golpe especial
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar
         self.gravidade = 0.3  # Intensidade da gravidade
         self.impulso = -11  # Impulso inicial do pulo
         self.ataque_ativo = False  # Flag para controle de ataque
         self.golpe_ativo = False  # Flag para controle de golpe especial
-
-        # Variáveis de cooldown
-        self.ultimo_golpe_especial = 0  # Armazena o último tempo em que o golpe especial foi usado
-        self.cooldown_golpe_especial = 3  # Tempo de cooldown (3 segundos)
     
     def aplicar_dano(self, dano):
         """Método para reduzir a vida (HP) do lutador."""
@@ -41,7 +39,7 @@ class Lutador:
 
         return soco_area
 
-    def socoespecial(self):
+    def chute(self):
         """Método para realizar o soco especial e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
         soco_largura = 30  # Largura da hitbox do golpe especial
         soco_altura = 50  # Altura da hitbox do golpe especial
@@ -56,24 +54,6 @@ class Lutador:
             soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe neutro (sem movimento)
 
         return soco_area
-
-
-    def socoespecial2(self):
-        """Método para realizar o soco especial e causar dano ao oponente para o Lutador 2."""
-        soco_largura = 30  # Largura da hitbox do golpe especial
-        soco_altura = 50  # Altura da hitbox do golpe especial
-
-        # Se o personagem está indo para a direita, a hitbox será à frente dele
-        if self.dimensao_x > 0:
-            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe à frente
-        # Se o personagem está indo para a esquerda, a hitbox será à esquerda dele
-        elif self.dimensao_x < 0:
-            soco_area = pygame.Rect(self.rect.x - 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe atrás
-        else:
-            soco_area = pygame.Rect(self.rect.x + 50, self.rect.y + 40, soco_largura, soco_altura)  # Golpe neutro (sem movimento)
-
-        return soco_area
-
 
     def movimentacao(self):
         """Controla os movimentos do Lutador 1 (com as teclas A, D, W)"""
@@ -116,7 +96,7 @@ class Lutador:
 
         if mov[pygame.K_k] and not self.golpe_ativo:
             self.golpe_ativo = True
-            self.socoespecial()
+            self.chute()
 
         elif mov[pygame.K_j] and not self.ataque_ativo:
             self.ataque_ativo = True
@@ -165,21 +145,19 @@ class Lutador:
 
         self.dimensao_x = dimensao_x  # Atualiza a direção de movimento do lutador 2
 
-        # Golpe especial com '1', com cooldown de 3 segundos
+        # Golpe especial com '2'
         if mov[pygame.K_2] and not self.golpe_ativo:
             self.golpe_ativo = True
-            self.ultimo_golpe_especial = time.time()  # Atualiza o tempo do último golpe especial
-            self.socoespecial2()
+            self.chute()
 
-        # Golpe normal com '2'
+        # Golpe normal com '1'
         elif mov[pygame.K_1] and not self.ataque_ativo:
             self.ataque_ativo = True
-            self.soco2()
+            self.soco()
 
         else:
             self.ataque_ativo = False
             self.golpe_ativo = False
-
 
 
     def box(self, surface):
@@ -191,21 +169,15 @@ class Lutador:
         """Desenha a barra de vida fixada no topo da tela."""
         barra_largura = 100
         barra_altura = 10
-        barra_x = 50 
-        if self.rect.x < largura_tela / 2:
-            pass
-        else: 
-            largura_tela - 150  # Ajusta a posição X com base no lado
-        barra_y = 20  # Definindo a posição fixa no topo da tela (20 pixels abaixo da borda superior)
+        barra_x = 50 if self.rect.x < largura_tela / 2 else largura_tela - 150  # Posiciona a barra dependendo da posição do lutador
+        barra_y = 30
 
-        # Desenhando o fundo da barra de vida (cinza)
+        # Calcula a largura da barra com base no HP atual
+        largura_atual = barra_largura * (self.hp / 100)
+
+        # Desenha a barra de fundo (cinza claro)
         pygame.draw.rect(surface, (169, 169, 169), (barra_x, barra_y, barra_largura, barra_altura))
-
-        # Calculando a vida restante
-        vida_restante = (self.hp / 100) * barra_largura
-
-        # Desenhando a barra de vida (verde)
-        pygame.draw.rect(surface, (0, 255, 0), (barra_x, barra_y, vida_restante, barra_altura))
-
+        # Desenha a barra de vida (verde)
+        pygame.draw.rect(surface, (0, 255, 0), (barra_x, barra_y, largura_atual, barra_altura))
 
 
