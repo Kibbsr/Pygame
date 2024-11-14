@@ -7,7 +7,7 @@ altura_tela = 835
 class Lutador:
     def __init__(self, x, y):
         self.rect = pygame.Rect(x, y, 100, 150)
-        self.hp = 100  # HP inicial do lutador
+        self.hp = 1000  # HP inicial do lutador
         self.dano_soco = 0.2  # Dano do soco
         self.dano_chute = 0.5  # Dano do golpe especial
         self.velocidade_y = 0  # Velocidade no eixo Y
@@ -165,19 +165,6 @@ class Lutador:
         pygame.draw.rect(surface, (0, 0, 255), self.rect)  # Desenha o lutador
         pygame.draw.rect(surface, (255, 0, 0), self.soco(), 2)  # Desenha a área do soco (hitbox)
 
-    def desenhar_barra_vida(self, surface):
-        """Desenha a barra de vida fixada no topo da tela."""
-        barra_largura = 100
-        barra_altura = 10
-        barra_x = 50 if self.rect.x < largura_tela / 2 else largura_tela - 150  # Posiciona a barra dependendo da posição do lutador
-        barra_y = 30
 
-        # Calcula a largura da barra com base no HP atual
-        largura_atual = barra_largura * (self.hp / 100)
-
-        # Desenha a barra de fundo (cinza claro)
-        pygame.draw.rect(surface, (169, 169, 169), (barra_x, barra_y, barra_largura, barra_altura))
-        # Desenha a barra de vida (verde)
-        pygame.draw.rect(surface, (0, 255, 0), (barra_x, barra_y, largura_atual, barra_altura))
 
 
