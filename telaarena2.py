@@ -46,27 +46,38 @@ fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 def plano():
     janela.blit(fundo, (0, 0))
 
-# Criando os dois lutadores
+# Função para limitar a posição de um lutador dentro dos limites da tela
+def limitar_posicao(lutador):
+    if lutador.rect.left < 0:
+        lutador.rect.left = 0
+    if lutador.rect.right > largura_tela:
+        lutador.rect.right = largura_tela
+    if lutador.rect.top < 0:
+        lutador.rect.top = 0
+    if lutador.rect.bottom > altura_tela:
+        lutador.rect.bottom = altura_tela
+
+# Criando dois objetos Lutador, um na posição (1000, 600) e outro em (100, 600)
 lutador1 = Lutador(1300, 600)
 lutador2 = Lutador(100, 600)
 
 # Loop principal do jogo, responsável por controlar a execução do jogo
 ini = True
-
-janela.blit(fundo,(0,0))
-lutador1=Lutador(1300, 600)
-lutador2=Lutador(100, 600)
-ini=True
 clock = pygame.time.Clock()
 FPS = 120
 while ini:
     clock.tick(FPS)
     plano()  # Desenha o fundo
+
     lutador1.movimentacao()  # Movimenta o lutador1
     lutador2.movimentacao2()  # Movimenta o lutador2
-    lutador1.box(janela)  # Desenha o lutador1
-    lutador2.box(janela)  # Desenha o lutador2
 
+    # Limita a posição dos lutadores dentro da tela
+    limitar_posicao(lutador1)
+    limitar_posicao(lutador2)
+
+    lutador1.box(janela)  # Desenha o lutador1
+    lutador2.box(janela) 
     # Verificar colisões entre os dois lutadores
     verificar_colisao(lutador1, lutador2)
     # Desenho da barra de vida para o lutador1
