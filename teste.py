@@ -146,12 +146,12 @@ class Lutador:
         self.dimensao_x = dimensao_x  # Atualiza a direção de movimento do lutador 2
 
         # Golpe especial com '2'
-        if mov[pygame.K_2] and not self.golpe_ativo:
+        if mov[pygame.K_m] and not self.golpe_ativo:
             self.golpe_ativo = True
             self.chute()
 
         # Golpe normal com '1'
-        elif mov[pygame.K_1] and not self.ataque_ativo:
+        elif mov[pygame.K_n] and not self.ataque_ativo:
             self.ataque_ativo = True
             self.soco()
 
