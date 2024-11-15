@@ -15,23 +15,25 @@ pygame.display.set_caption("Seleção Personagens")
 
 #Importar lutadores
 
-personagem1 = pygame.image.load()
+personagem1 = pygame.image.load('arena4.jpg')
 
-personagem2 = pygame.image.load()
+personagem2 = pygame.image.load('arena4.jpg')
 
-personagem3 = pygame.image.load()
+personagem3 = pygame.image.load('arena4.jpg')
 
-personagem4 = pygame.image.load()
+personagem4 = pygame.image.load('arena4.jpg')
 
 
 personagens = [personagem1, personagem2 , personagem3, personagem4]
 
 for personagem in personagens:
-    pygame.transform.scale(personagem, ( , ))
+    pygame.transform.scale(personagem, ( 10, 12))
     
 i1 = 0
 i2 = 0
 
+x = 10
+y = 12
 
 def desenhar_personagem():
     jogador1_personagem = personagens[i1]

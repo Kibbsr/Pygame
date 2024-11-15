@@ -90,9 +90,9 @@ while ini:
                     tela_atual = 'Floresta'
                 elif event.key == pygame.K_a:
                     tela_atual = 'Gelo'
-                elif event.key == pygame.K_w:
-                    tela_atual = 'Praia'
                 elif event.key == pygame.K_s:
+                    tela_atual = 'Praia'
+                elif event.key == pygame.K_w:
                     tela_atual = 'Deposito'
             elif event.key == pygame.K_ESCAPE:
                 tela_atual = 'menu'
