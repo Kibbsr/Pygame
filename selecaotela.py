@@ -4,8 +4,8 @@ import subprocess
 import sys
 
 pygame.init()
-largura_tela = 1550
-altura_tela = 835
+largura_tela = 1540
+altura_tela = 805
 janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("")
 

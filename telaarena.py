@@ -29,8 +29,8 @@ def verificar_colisao(lutador1, lutador2):
 
 
 pygame.init()
-largura_tela = 1550
-altura_tela = 835
+largura_tela = 1540
+altura_tela = 805
 janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Luta")
 fundo = pygame.image.load("arenaluta1.png").convert_alpha()

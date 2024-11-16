@@ -32,8 +32,8 @@ def verificar_colisao(lutador1, lutador2):
 pygame.init()
 
 # Definindo as dimensões da tela (janela do jogo)
-largura_tela = 1550  # Largura da tela em pixels
-altura_tela = 835    # Altura da tela em pixels
+largura_tela = 1540  # Largura da tela em pixels
+altura_tela = 805    # Altura da tela em pixels
 
 # Criando a janela do jogo com as dimensões especificadas
 janela = pygame.display.set_mode((largura_tela, altura_tela))
