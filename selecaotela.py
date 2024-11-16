@@ -35,7 +35,7 @@ def tela_menu():
     
     # Adicione aqui o texto ou opções de menu
     fonte = pygame.font.Font("Play-Regular.ttf", 40)
-    texto = fonte.render("Pressione A,D ou W para ver as fases", True, (0, 0, 0))
+    texto = fonte.render("Pressione W, A, S ou D para ver as fases", True, (0, 0, 0))
     janela.blit(texto, (15,25))
     texto = fonte.render("e ENTER para selecionar!", True, (0, 0, 0))
     janela.blit(texto, (15,80))
