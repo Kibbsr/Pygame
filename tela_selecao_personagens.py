@@ -3,6 +3,7 @@ from teste import Lutador
 import subprocess
 import sys
 
+estado = "Seleção Personagem"
 
 pygame.init()
 largura_tela = 1550
@@ -11,7 +12,8 @@ janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Seleção Personagens")
 
 fonte = pygame.font.Font('Play-Regular.ttf', 44)
-
+confirmar = fonte.render("Pressione ENTER para selecionar", True, (0,0,0))
+janela.blit = (confirmar, (15,25))
 
 #Importar lutadores
 
@@ -88,7 +90,7 @@ while ini:
 
 
             if event.key == pygame.K_RETURN:
-                confirmar_escolha(2)
+                confirmar_escolha(1)
 
             if event.key == pygame.K_KP_ENTER:
                 confirmar_escolha(2)
@@ -96,13 +98,11 @@ while ini:
     jogador1 = personagens[i1]
     jogador2 = personagens[i2]
 
+    if confirmado1 and confirmado2:
+        subprocess.run(["python", "telaarena.py"])
+        pygame.quit()
+        sys.exit()
 
 
-            
+        #mandar para a tela de jogo
 
-                
-
-
-
-        
-    
