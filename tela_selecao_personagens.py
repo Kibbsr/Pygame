@@ -13,7 +13,7 @@ pygame.display.set_caption("Seleção Personagens")
 
 fonte = pygame.font.Font('Play-Regular.ttf', 44)
 confirmar = fonte.render("Pressione ENTER para selecionar", True, (0,0,0))
-janela.blit = (confirmar, (15,25))
+
 
 #Importar lutadores
 
@@ -30,9 +30,9 @@ personagens = [personagem1, personagem2 , personagem3, personagem4]
 
 
 
-for personagem in personagens:
-    pygame.transform.scale(personagem, ( 100, 150))
-    
+for i in range(len(personagens)):
+    personagens[i] = pygame.transform.scale(personagens[i], (100, 150))
+
 i1 = 0
 i2 = 0
 
@@ -59,6 +59,7 @@ def desenhar_personagem():
 
 
 def confirmar_escolha(numero):
+    global confirmado1, confirmado2
     if numero == 1:
         confirmado1 = True
         print(f"jogador1 escolheu o personagem {i1+1}")
@@ -79,14 +80,14 @@ while ini:
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_a:
-                i1 = i1 - 1
+                i1 = (i1 - 1) % len(personagens)
             elif event.key == pygame.K_d:
-                i1 = i1 + 1
+                i1 = (i1 + 1) % len(personagens)
             
             elif event.key == pygame.K_LEFT:
-                i2 = i2 - 1
+                i2 = (i2 - 1) % len(personagens)
             elif event.key == pygame.K_RIGHT:
-                i2 = i2 + 1
+                i2 = (i2 - 1) % len(personagens)
 
 
             if event.key == pygame.K_RETURN:
@@ -94,9 +95,14 @@ while ini:
 
             if event.key == pygame.K_KP_ENTER:
                 confirmar_escolha(2)
-        desenhar_personagem()
-    jogador1 = personagens[i1]
-    jogador2 = personagens[i2]
+
+            if event.key == pygame.K_ESCAPE:
+                global confirmado1, confirmado2
+                confirmado1 = False
+                confirmado2 = False
+    desenhar_personagem()
+    janela.blit(confirmar, (15, 25))
+    pygame.display.flip()
 
     if confirmado1 and confirmado2:
         subprocess.run(["python", "telaarena.py"])
