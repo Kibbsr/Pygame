@@ -1,7 +1,8 @@
 import pygame
 # Importando a classe Lutador do arquivo 'teste.py'. Ela define o comportamento dos lutadores no jogo
 from teste import Lutador
-
+import subprocess
+import sys
 def verificar_colisao(lutador1, lutador2):
     """Verifica se o golpe de lutador1 atingiu lutador2, só causando dano se o golpe estiver ativo."""
 
@@ -93,17 +94,38 @@ while ini:
     barra_altura = 50
     barra_x = 15
     barra_y = 20
-    vida_restante1 = (lutador1.hp / 1000) * barra_largura
+    vida_restante1 = (lutador1.hp / 700) * barra_largura
     pygame.draw.rect(janela, (255, 0, 0), pygame.Rect([barra_x, barra_y], [barra_largura, barra_altura]))
     pygame.draw.rect(janela, (55, 125, 34), pygame.Rect(barra_x, barra_y, vida_restante1, barra_altura))
 
     # Desenho da barra de vida para o lutador2
     barra_x2 = 1280
     barra_y2 = 20
-    vida_restante2 = (lutador2.hp / 1000) * barra_largura
+    vida_restante2 = (lutador2.hp / 700) * barra_largura
     pygame.draw.rect(janela, (255, 0, 0), pygame.Rect([barra_x2, barra_y2], [barra_largura, barra_altura]))
     pygame.draw.rect(janela, (55, 125, 34), pygame.Rect(barra_x2, barra_y2, vida_restante2, barra_altura))
+    if vida_restante2 == 0:
+        jogador2st = "morto"
+        lutador2 = False
+    else:
+        jogador2st = "vivo"
 
+    if vida_restante1 == 0:
+        jogador1st = "morto"
+        lutador1 = False
+    else:
+        jogador1st = "vivo"
+
+    if jogador2st == "morto":
+        vencedor = "Jogador 1"
+        subprocess.run(["python", "tela_final.py"])
+        pygame.quit()
+        sys.exit()
+    elif jogador1st == "morto":
+        vencedor = "Jogador 2"
+        subprocess.run(["python", "tela_final.py"])
+        pygame.quit()
+        sys.exit()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             ini = False
