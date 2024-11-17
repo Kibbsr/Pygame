@@ -97,7 +97,6 @@ while ini:
                 confirmar_escolha(2)
 
             if event.key == pygame.K_ESCAPE:
-                global confirmado1, confirmado2
                 confirmado1 = False
                 confirmado2 = False
     desenhar_personagem()

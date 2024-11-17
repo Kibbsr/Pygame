@@ -4,8 +4,9 @@ import pygame
 largura_tela = 1550
 altura_tela = 835
 
-class Lutador:
+class Lutador(pygame.sprite.Sprite):
     def __init__(self, x, y):
+        super().__init__()
         self.rect = pygame.Rect(x, y, 100, 150)
         self.hp = 1000  # HP inicial do lutador
         self.dano_soco = 0.2  # Dano do soco
@@ -16,7 +17,35 @@ class Lutador:
         self.impulso = -11  # Impulso inicial do pulo
         self.ataque_ativo = False  # Flag para controle de ataque
         self.golpe_ativo = False  # Flag para controle de golpe especial
-    
+        self.sprite_atual = 0
+        self.soco_animado = False
+
+
+        self.image = pygame.Surface((100,150))
+        self.image.fill((0,0,255))
+        #Sprites
+        for i in range(0,5):
+            self.sprites_soco = [pygame.image.load(f"Attack_1.1_frames/frame_{i}.png")]
+        self.sprite_transicoes = 100
+        self.sprite_i = 0
+        self.sprite_t = 0
+        self.sprite_delay = 50
+
+        
+    def animacao(self):
+        if self.soco_animado:
+            if pygame.time.get.ticks() - self.sprite_t > self.sprite_delay:
+                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_i +=1
+                if self.sprite_i >= len(self.sprites_soco):
+                    self.sprite_i = 0
+                    self.soco_animado = False
+                self.image = self.sprites_soco[self.sprite_i]
+            else:
+                self.image = self.sprites_soco[self.sprite_i]
+
+
+
     def aplicar_dano(self, dano):
         """Método para reduzir a vida (HP) do lutador."""
         self.hp -= dano
@@ -25,6 +54,8 @@ class Lutador:
 
     def soco(self):
         """Método para realizar o soco e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
+        self.soco_animado = True
+        self.sprite_i = 0
         soco_largura = 30  # Largura da hitbox do soco
         soco_altura = 50  # Altura da hitbox do soco
     
@@ -57,10 +88,7 @@ class Lutador:
 
     def movimentacao(self):
         """Controla os movimentos do Lutador 1 (com as teclas A, D, W)"""
-        if self.rect.x > largura_tela:
-            self.rect.x = largura_tela
-        if self.rect.x < 0:
-            self.rect.x = 0
+
 
         mov_velocidade = 3.5
         dimensao_x = 0
@@ -162,9 +190,12 @@ class Lutador:
 
     def box(self, surface):
         """Desenha o lutador na tela."""
-        pygame.draw.rect(surface, (0, 0, 255), self.rect)  # Desenha o lutador
-        pygame.draw.rect(surface, (255, 0, 0), self.soco(), 2)  # Desenha a área do soco (hitbox)
+        #colocar self.image
+        pygame.draw.rect(self.image, self.rect)  # Desenha o lutador
+        if self.soco_animado:
+            pygame.draw.rect(surface, (255, 0, 0), self.soco(), 2)  # Desenha a área do soco (hitbox)
 
 
 
-
+    def atualizar_animacao(self):
+        self.animacao()
