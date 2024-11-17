@@ -7,9 +7,9 @@ altura_tela = 835
 class Lutador:
     def __init__(self, x, y):
         self.rect = pygame.Rect(x, y, 100, 150)
-        self.hp = 1000  # HP inicial do lutador
-        self.dano_soco = 0.2  # Dano do soco
-        self.dano_chute = 0.5  # Dano do golpe especial
+        self.hp = 700  # HP inicial do lutador
+        self.dano_soco = 1  # Dano do soco
+        self.dano_chute = 3  # Dano do golpe especial
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar
         self.gravidade = 0.3  # Intensidade da gravidade

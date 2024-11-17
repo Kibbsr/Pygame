@@ -24,8 +24,10 @@ def tela_final():
     janela.blit(texto, (15,25))
     texto2 = fonte.render("ou ESC para sair!", True, (0, 0, 0))
     janela.blit(texto2, (15,75))
-    texto = fonte.render("O vencedor foi o Jogador 1!", True, (0, 0, 0))
+    
+    texto = fonte.render("O vencedor foi o Jogador 2!", True, (0, 0, 0))
     janela.blit(texto, (15,250))
+
 ini=True
 while ini:
     tela_final()
