@@ -17,7 +17,7 @@ janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("FIM")
 
 # Carrega e ajusta o fundo do menu
-fundo_menu = pygame.image.load("ARENA.png").convert()
+fundo_menu = pygame.image.load("imagemmelhor.jpeg").convert()
 fundo_menu = pygame.transform.scale(fundo_menu, (largura_tela, altura_tela))
 
 # Carrega uma imagem adicional (não está sendo usada diretamente aqui)
