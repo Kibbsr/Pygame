@@ -21,9 +21,9 @@ confirmar = fonte.render("Pressione ENTER para selecionar", True, (255, 255, 255
 
 # Importar lutadores
 try:
-    personagem1 = pygame.image.load('Attack_1.1_frames/frame_0.png')
-    personagem2 = pygame.image.load('Attack_2.1/frame_1.png')
-
+    personagem1 = pygame.image.load('Attack_1.1_frames/frame_0.png') #0 - 
+    personagem2 = pygame.image.load('Attack_2.1/frame_1.png') #1 - 
+    
 except pygame.error as e:
     print(f"Erro ao carregar imagens: {e}")
     sys.exit()
@@ -43,18 +43,18 @@ confirmado2 = False
 def desenhar_personagem():
     janela.fill((0, 0, 0))
     jogador1_personagem = personagens[i1]
-    janela.blit(jogador1_personagem, (1300, 600))
+    janela.blit(jogador1_personagem, (100, 600))
 
     jogador2_personagem = personagens[i2]
-    janela.blit(jogador2_personagem, (100, 600))
+    janela.blit(jogador2_personagem, (1300, 600))
 
     if confirmado1:
         pronto = fonte.render("Pronto!", True, (255, 255, 255))
-        janela.blit(pronto, (1300, 550))  # Ajuste na posição
+        janela.blit(pronto, (100, 550))  # Ajuste na posição
 
     if confirmado2:
         pronto = fonte.render("Pronto!", True, (255, 255, 255))
-        janela.blit(pronto, (100, 550))  # Ajuste na posição
+        janela.blit(pronto, (1300, 550))  # Ajuste na posição
 
     janela.blit(confirmar, (15, 25))  # Exibição do texto fixo
     pygame.display.flip()
