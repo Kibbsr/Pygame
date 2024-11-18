@@ -97,7 +97,7 @@ class Lutador(pygame.sprite.Sprite):
         self.hp -= dano
         if self.hp < 0:
             self.hp = 0  # Impede que a vida seja negativa
-            self.morte_animada = True
+            self.morte_animado = True
 
     def soco(self):
         """Método para realizar o soco e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
@@ -119,6 +119,7 @@ class Lutador(pygame.sprite.Sprite):
 
     def chute(self):
         """Método para realizar o soco especial e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
+        self.chute_animado = True
         self.sprite_i = 0
         soco_largura = 30  # Largura da hitbox do golpe especial
         soco_altura = 50  # Altura da hitbox do golpe especial
