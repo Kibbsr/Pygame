@@ -28,13 +28,17 @@ class Lutador(pygame.sprite.Sprite):
         self.image = pygame.Surface((100,150))
         self.image.fill((0,0,255))
         #Sprites
-        for i in range(0,5):
-            self.sprites_soco = [pygame.image.load(f"Attack_1.1_frames/frame_{i}.png")]
+    
+        self.sprites_soco = [pygame.image.load(f"Attack_1.1_frames/frame_{i}.png")for i in range(5)]
+        self.sprites_pulo = [pygame.image.load(f"Jump1/frame_{i}.png")for i in range(3)]
+        self.sprites_corrida = [pygame.image.load(f"Run1/frame_{i}.png")for i in range(4)]
+        self.sprites_chute = [pygame.image.load(f"Attack_1.2_frames/frame_{i}.png")for i in range(4)]
+        self.sprites_morte = [pygame.image.load(f"Dead1/frame_{i}.png")for i in range(4)]
+        
         self.sprite_transicoes = 100
         self.sprite_i = 0
         self.sprite_t = 0
         self.sprite_delay = 50
-
         
     def animacao(self):
         if self.soco_animado:
