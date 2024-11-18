@@ -22,7 +22,7 @@ confirmar = fonte.render("Pressione ENTER para selecionar", True, (255, 255, 255
 # Importar lutadores
 try:
     personagem1 = pygame.image.load('Attack_1.1_frames/frame_0.png')
-    personagem2 = pygame.image.load('Attack_1.1_frames/frame_1.png')
+    personagem2 = pygame.image.load('Attack_2.1/frame_1.png')
 
 except pygame.error as e:
     print(f"Erro ao carregar imagens: {e}")
