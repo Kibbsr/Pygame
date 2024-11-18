@@ -41,56 +41,29 @@ class Lutador(pygame.sprite.Sprite):
         self.sprite_delay = 50
         
     def animacao(self):
+        # Função auxiliar para atualizar a animação
+        def atualizar_animacao(sprite_list, anim_flag):
+            if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
+                self.sprite_t = pygame.time.get_ticks()
+                self.sprite_i += 1
+                if self.sprite_i >= len(sprite_list):
+                    self.sprite_i = 0
+                    setattr(self, anim_flag, False)  # Reseta o flag da animação
+                self.image = sprite_list[self.sprite_i]
+            else:
+                self.image = sprite_list[self.sprite_i]
+
+        # Verifica qual animação está ativa e chama a função auxiliar
         if self.soco_animado:
-            if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get_ticks()
-                self.sprite_i +=1
-                if self.sprite_i >= len(self.sprites_soco):
-                    self.sprite_i = 0
-                    self.soco_animado = False
-                self.image = self.sprites_soco[self.sprite_i]
-            else:
-                self.image = self.sprites_soco[self.sprite_i]
+            atualizar_animacao(self.sprites_soco, 'soco_animado')
         elif self.pulo_animado:
-            if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get_ticks()
-                self.sprite_i +=1
-                if self.sprite_i >= len(self.sprites_pulo):
-                    self.sprite_i = 0
-                    self.pulo_animado = False
-                self.image = self.sprites_pulo[self.sprite_i]
-            else:
-                self.image = self.sprites_pulo[self.sprite_i]
+            atualizar_animacao(self.sprites_pulo, 'pulo_animado')
         elif self.morte_animado:
-            if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get_ticks()
-                self.sprite_i +=1
-                if self.sprite_i >= len(self.sprites_morte):
-                    self.sprite_i = 0
-                    self.morte_animado = False
-                self.image = self.sprites_morte[self.sprite_i]
-            else:
-                self.image = self.sprites_morte[self.sprite_i]
+            atualizar_animacao(self.sprites_morte, 'morte_animado')
         elif self.corrida_animado:
-            if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get_ticks()
-                self.sprite_i +=1
-                if self.sprite_i >= len(self.sprites_corrida):
-                    self.sprite_i = 0
-                    self.pulo_animado = False
-                self.image = self.sprites_corrida[self.sprite_i]
-            else:
-                self.image = self.sprites_corrida[self.sprite_i]
+            atualizar_animacao(self.sprites_corrida, 'corrida_animado')
         elif self.chute_animado:
-            if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get_ticks()
-                self.sprite_i +=1
-                if self.sprite_i >= len(self.sprites_chute):
-                    self.sprite_i = 0
-                    self.pulo_animado = False
-                self.image = self.sprites_chute[self.sprite_i]
-            else:
-                self.image = self.sprites_chute[self.sprite_i]
+            atualizar_animacao(self.sprites_chute, 'chute_animado')
 
     def aplicar_dano(self, dano):
         """Método para reduzir a vida (HP) do lutador."""

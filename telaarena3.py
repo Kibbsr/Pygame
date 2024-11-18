@@ -100,7 +100,7 @@ while ini:
     barra_altura = 50
     barra_x = 15
     barra_y = 20
-    vida_restante1 = (lutador1.hp / 700) * barra_largura
+    vida_restante1 = (lutador1.hp / 800) * barra_largura
     pygame.draw.rect(janela, (255, 0, 0), pygame.Rect([barra_x, barra_y], [barra_largura, barra_altura]))
     pygame.draw.rect(janela, (55, 125, 34), pygame.Rect(barra_x, barra_y, vida_restante1, barra_altura))
 
