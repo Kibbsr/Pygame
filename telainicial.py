@@ -58,7 +58,7 @@ while game:
             if event.key == pygame.K_RETURN:
                 pygame.mixer.music.stop
                 pygame.quit()
-                subprocess.run(["python", "selecaotelafg.py"])
+                subprocess.run(["python", "selecaotela.py"])
 
                 sys.exit()
 

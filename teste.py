@@ -233,7 +233,7 @@ class Lutador(pygame.sprite.Sprite):
             self.golpe_ativo = True
             self.chute()
 
-        elif mov[pygame.K_g] and not self.ataque_ativo:
+        elif mov[pygame.K_1] and not self.ataque_ativo:
             self.ataque_ativo = True
             self.soco()
         else:
@@ -295,7 +295,7 @@ class Lutador(pygame.sprite.Sprite):
             self.chute()
 
         # Golpe normal com '1'
-        elif mov[pygame.K_n] and not self.ataque_ativo:
+        elif mov[pygame.K_1] and not self.ataque_ativo:
             self.ataque_ativo = True
             self.soco()
 
