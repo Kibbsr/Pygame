@@ -10,7 +10,7 @@ class Lutador(pygame.sprite.Sprite):
         self.rect = pygame.Rect(x, y, 100, 150)
         self.hp = 700  # HP inicial do lutador
         self.dano_soco = 1  # Dano do soco
-        self.dano_chute = 3  # Dano do golpe especial
+        self.dano_chute = 4  # Dano do golpe especial
         self.velocidade_y = 0  # Velocidade no eixo Y
         self.no_chao = True  # Indica se o lutador está no chão ou no ar
         self.gravidade = 0.3  # Intensidade da gravidade
