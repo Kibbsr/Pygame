@@ -41,6 +41,7 @@ confirmado2 = False
 
 
 def desenhar_personagem():
+    janela.fill((0, 0, 0))
     jogador1_personagem = personagens[i1]
     janela.blit(jogador1_personagem, (1300, 600))
 
@@ -79,23 +80,28 @@ while ini:
             sys.exit()
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_a:
-                i1 = (i1 - 1) % len(personagens)
-            elif event.key == pygame.K_d:
-                i1 = (i1 + 1) % len(personagens)
-            
-            elif event.key == pygame.K_LEFT:
-                i2 = (i2 - 1) % len(personagens)
-            elif event.key == pygame.K_RIGHT:
-                i2 = (i2 - 1) % len(personagens)
+        # Trocar personagem jogador 1 (se não confirmado)
+            if not confirmado1:
+                if event.key == pygame.K_a:
+                    i1 = (i1 - 1) % len(personagens)
+                elif event.key == pygame.K_d:
+                    i1 = (i1 + 1) % len(personagens)
 
+            # Trocar personagem jogador 2 (se não confirmado)
+            if not confirmado2:
+                if event.key == pygame.K_LEFT:
+                    i2 = (i2 - 1) % len(personagens)
+                elif event.key == pygame.K_RIGHT:
+                    i2 = (i2 + 1) % len(personagens)
 
-            if event.key == pygame.K_RETURN:
+            # Confirmar escolha
+            if event.key == pygame.K_RETURN and not confirmado1:
                 confirmar_escolha(1)
 
-            if event.key == pygame.K_KP_ENTER:
+            if event.key == pygame.K_KP_ENTER and not confirmado2:
                 confirmar_escolha(2)
 
+            # Resetar confirmações com ESC
             if event.key == pygame.K_ESCAPE:
                 confirmado1 = False
                 confirmado2 = False
