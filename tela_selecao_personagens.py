@@ -17,13 +17,13 @@ confirmar = fonte.render("Pressione ENTER para selecionar", True, (0,0,0))
 
 #Importar lutadores
 
-personagem1 = pygame.image.load('')
+personagem1 = pygame.image.load('Attack_1.1_frames/frame_0.png')
 
-personagem2 = pygame.image.load('')
+personagem2 = pygame.image.load('Attack_1.1_frames/frame_1.png')
 
-personagem3 = pygame.image.load('')
+personagem3 = pygame.image.load('Attack_1.1_frames/frame_2.png')
 
-personagem4 = pygame.image.load('')
+personagem4 = pygame.image.load('Attack_1.1_frames/frame_3.png')
 
 
 personagens = [personagem1, personagem2 , personagem3, personagem4]
@@ -104,10 +104,8 @@ while ini:
     pygame.display.flip()
 
     if confirmado1 and confirmado2:
-        subprocess.run(["python", "telaarena.py"])
         pygame.quit()
+        subprocess.run(["python", "selecaotela.py"])
         sys.exit()
 
-
-        #mandar para a tela de jogo
 
