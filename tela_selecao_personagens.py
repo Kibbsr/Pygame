@@ -11,24 +11,25 @@ altura_tela = 805
 janela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Seleção Personagens")
 
-fonte = pygame.font.Font('Play-Regular.ttf', 44)
-confirmar = fonte.render("Pressione ENTER para selecionar", True, (0,0,0))
+# Carregar a fonte
+try:
+    fonte = pygame.font.Font('Play-Regular.ttf', 44)
+except FileNotFoundError:
+    fonte = pygame.font.Font(pygame.font.get_default_font(), 44)
 
+confirmar = fonte.render("Pressione ENTER para selecionar", True, (255, 255, 255))
 
-#Importar lutadores
+# Importar lutadores
+try:
+    personagem1 = pygame.image.load('Attack_1.1_frames/frame_0.png')
+    personagem2 = pygame.image.load('Attack_1.1_frames/frame_1.png')
+    personagem3 = pygame.image.load('Attack_1.1_frames/frame_2.png')
+    personagem4 = pygame.image.load('Attack_1.1_frames/frame_3.png')
+except pygame.error as e:
+    print(f"Erro ao carregar imagens: {e}")
+    sys.exit()
 
-personagem1 = pygame.image.load('Attack_1.1_frames/frame_0.png')
-
-personagem2 = pygame.image.load('Attack_1.1_frames/frame_1.png')
-
-personagem3 = pygame.image.load('Attack_1.1_frames/frame_2.png')
-
-personagem4 = pygame.image.load('Attack_1.1_frames/frame_3.png')
-
-
-personagens = [personagem1, personagem2 , personagem3, personagem4]
-
-
+personagens = [personagem1, personagem2, personagem3, personagem4]
 
 for i in range(len(personagens)):
     personagens[i] = pygame.transform.scale(personagens[i], (100, 150))
@@ -50,12 +51,13 @@ def desenhar_personagem():
 
     if confirmado1:
         pronto = fonte.render("Pronto!", True, (255, 255, 255))
-        janela.blit(pronto, (1300, 600) )
+        janela.blit(pronto, (1300, 550))  # Ajuste na posição
 
     if confirmado2:
         pronto = fonte.render("Pronto!", True, (255, 255, 255))
-        janela.blit(pronto, (100, 600) )
+        janela.blit(pronto, (100, 550))  # Ajuste na posição
 
+    janela.blit(confirmar, (15, 25))  # Exibição do texto fixo
     pygame.display.flip()
 
 
@@ -63,24 +65,22 @@ def confirmar_escolha(numero):
     global confirmado1, confirmado2
     if numero == 1:
         confirmado1 = True
-        print(f"jogador1 escolheu o personagem {i1+1}")
-
-    if numero == 2:
+        print(f"Jogador 1 escolheu o personagem {i1 + 1}")
+    elif numero == 2:
         confirmado2 = True
-        print(f"jogador2 escolheu o personagem {i2+1}")
-    #continuar para a próxima fase
+        print(f"Jogador 2 escolheu o personagem {i2 + 1}")
 
 
-ini=True
+ini = True
 while ini:
-    selecionado = None
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             ini = False
-            sys.exit()
             pygame.quit()
+            sys.exit()
+
         elif event.type == pygame.KEYDOWN:
-        # Trocar personagem jogador 1 (se não confirmado)
+            # Trocar personagem jogador 1 (se não confirmado)
             if not confirmado1:
                 if event.key == pygame.K_a:
                     i1 = (i1 - 1) % len(personagens)
@@ -97,21 +97,20 @@ while ini:
             # Confirmar escolha
             if event.key == pygame.K_RETURN and not confirmado1:
                 confirmar_escolha(1)
-
-            if event.key == pygame.K_KP_ENTER and not confirmado2:
+            elif event.key == pygame.K_KP_ENTER and not confirmado2:
                 confirmar_escolha(2)
 
             # Resetar confirmações com ESC
             if event.key == pygame.K_ESCAPE:
                 confirmado1 = False
                 confirmado2 = False
+                i1 = 0
+                i2 = 0
+
     desenhar_personagem()
-    janela.blit(confirmar, (15, 25))
-    pygame.display.flip()
 
     if confirmado1 and confirmado2:
         pygame.quit()
-        subprocess.run(["python", "selecaotela.py"])
+        subprocess.run([sys.executable, "selecaotela.py"])
         sys.exit()
-
 
