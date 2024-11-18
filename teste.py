@@ -43,7 +43,7 @@ class Lutador(pygame.sprite.Sprite):
     def animacao(self):
         if self.soco_animado:
             if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_t = pygame.time.get_ticks()
                 self.sprite_i +=1
                 if self.sprite_i >= len(self.sprites_soco):
                     self.sprite_i = 0
@@ -53,7 +53,7 @@ class Lutador(pygame.sprite.Sprite):
                 self.image = self.sprites_soco[self.sprite_i]
         elif self.pulo_animado:
             if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_t = pygame.time.get_ticks()
                 self.sprite_i +=1
                 if self.sprite_i >= len(self.sprites_pulo):
                     self.sprite_i = 0
@@ -63,7 +63,7 @@ class Lutador(pygame.sprite.Sprite):
                 self.image = self.sprites_pulo[self.sprite_i]
         elif self.morte_animado:
             if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:
-                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_t = pygame.time.get_ticks()
                 self.sprite_i +=1
                 if self.sprite_i >= len(self.sprites_morte):
                     self.sprite_i = 0
