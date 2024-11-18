@@ -25,7 +25,7 @@ class Lutador(pygame.sprite.Sprite):
         self.image.fill((0,0,255))
         #Sprites
         for i in range(0,5):
-            self.sprites_soco = [pygame.image.load(f"Attack_1.1_frames/frame_{i}.png")]
+            self.sprites_soco = [pygame.image.load(f"Attack_1.1/frame_{i}.png")]
         self.sprite_transicoes = 100
         self.sprite_i = 0
         self.sprite_t = 0
