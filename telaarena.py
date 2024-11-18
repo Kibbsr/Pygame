@@ -71,7 +71,8 @@ FPS = 120
 while ini:
     clock.tick(FPS)
     plano()  # Desenha o fundo
-
+    lutador1.atualizar_animacao()
+    lutador2.atualizar_animacao()
     lutador1.movimentacao()  # Movimenta o lutador1
     lutador2.movimentacao2()  # Movimenta o lutador2
 
