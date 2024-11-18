@@ -41,6 +41,7 @@ confirmado2 = False
 
 
 def desenhar_personagem():
+    janela.fill((0, 0, 0))
     jogador1_personagem = personagens[i1]
     janela.blit(jogador1_personagem, (1300, 600))
 
