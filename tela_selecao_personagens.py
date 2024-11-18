@@ -23,13 +23,12 @@ confirmar = fonte.render("Pressione ENTER para selecionar", True, (255, 255, 255
 try:
     personagem1 = pygame.image.load('Attack_1.1_frames/frame_0.png')
     personagem2 = pygame.image.load('Attack_1.1_frames/frame_1.png')
-    personagem3 = pygame.image.load('Attack_1.1_frames/frame_2.png')
-    personagem4 = pygame.image.load('Attack_1.1_frames/frame_3.png')
+
 except pygame.error as e:
     print(f"Erro ao carregar imagens: {e}")
     sys.exit()
 
-personagens = [personagem1, personagem2, personagem3, personagem4]
+personagens = [personagem1, personagem2]
 
 for i in range(len(personagens)):
     personagens[i] = pygame.transform.scale(personagens[i], (100, 150))
