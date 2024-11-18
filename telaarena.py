@@ -38,9 +38,11 @@ pygame.display.set_caption("Luta")
 fundo = pygame.image.load("arenaluta1.png").convert_alpha()
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
+
+
 pygame.mixer.init()
-pygame.mixer.music.load("721472__victor_natas__boss-fight.ogg")
-fim_jogo = pygame.mixer.Sound("527650__fupicat__winsquare.ogg")
+pygame.mixer.music.load("548480__leehayeskerr__battlefield.ogg")
+
 pygame.mixer.music.set_volume(0.4)
 pygame.mixer.music.play(loops=-1)
 
@@ -125,7 +127,7 @@ while ini:
 
     pygame.display.update()  # Atualiza a tela
 
-fim_jogo.play()  # Som de fim de jogo (caso aplicável)
+
 pygame.quit()  # Finaliza o Pygame
 
 

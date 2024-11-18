@@ -56,9 +56,10 @@ while game:
             game = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                pygame.mixer.music.set_volume(0.0)
-                subprocess.run(["python", "selecaotela.py"])
+                pygame.mixer.music.stop
                 pygame.quit()
+                subprocess.run(["python", "selecaotela.py"])
+
                 sys.exit()
 
     # Atualiza a tela

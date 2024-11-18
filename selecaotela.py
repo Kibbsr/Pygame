@@ -30,6 +30,10 @@ miniatura_fase2 = pygame.transform.scale(fundoarena2, (400, 225))
 miniatura_fase3 = pygame.transform.scale(fundoarena3, (400, 225))
 miniatura_fase4 = pygame.transform.scale(fundoarena4, (400, 225))
 
+pygame.mixer.music.load("721292__victor_natas__are-you-game.ogg")
+pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.play(loops=-1)
+
 def tela_menu():
     janela.blit(fundo_menu, (0, 0))
     
@@ -103,32 +107,36 @@ while ini:
             fase2()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    subprocess.run(["python", "telaarena2.py"])
+                    pygame.mixer.music.stop
                     pygame.quit()
+                    subprocess.run(["python", "telaarena2.py"])
                     sys.exit()
                     
         elif tela_atual == 'Floresta':
             fase1()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    subprocess.run(["python", "telaarena.py"])
+                    pygame.mixer.music.stop
                     pygame.quit()
+                    subprocess.run(["python", "telaarena.py"])
                     sys.exit()
 
         elif tela_atual == 'Praia':
             fase3()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    subprocess.run(["python", "telaarena3.py"])
+                    pygame.mixer.music.stop
                     pygame.quit()
+                    subprocess.run(["python", "telaarena3.py"])
                     sys.exit()
 
         elif tela_atual == 'Deposito':
             fase4()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    subprocess.run(["python", "telaarena4.py"])
+                    pygame.mixer.music.stop
                     pygame.quit()
+                    subprocess.run(["python", "telaarena4.py"])
                     sys.exit()
                     
                    
