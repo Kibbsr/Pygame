@@ -19,6 +19,10 @@ class Lutador(pygame.sprite.Sprite):
         self.golpe_ativo = False  # Flag para controle de golpe especial
         self.sprite_atual = 0
         self.soco_animado = False
+        self.pulo_animado = False
+        self.morte_animado = False
+        self.corrida_animado = False
+        self.chute_animado = False
 
 
         self.image = pygame.Surface((100,150))
@@ -43,14 +47,53 @@ class Lutador(pygame.sprite.Sprite):
                 self.image = self.sprites_soco[self.sprite_i]
             else:
                 self.image = self.sprites_soco[self.sprite_i]
-
-
+        elif self.pulo_animado:
+            if pygame.time.get.ticks() - self.sprite_t > self.sprite_delay:
+                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_i +=1
+                if self.sprite_i >= len(self.sprites_pulo):
+                    self.sprite_i = 0
+                    self.pulo_animado = False
+                self.image = self.sprites_pulo[self.sprite_i]
+            else:
+                self.image = self.sprites_pulo[self.sprite_i]
+        elif self.morte_animado:
+            if pygame.time.get.ticks() - self.sprite_t > self.sprite_delay:
+                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_i +=1
+                if self.sprite_i >= len(self.sprites_morte):
+                    self.sprite_i = 0
+                    self.morte_animado = False
+                self.image = self.sprites_morte[self.sprite_i]
+            else:
+                self.image = self.sprites_morte[self.sprite_i]
+        elif self.corrida_animado:
+            if pygame.time.get.ticks() - self.sprite_t > self.sprite_delay:
+                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_i +=1
+                if self.sprite_i >= len(self.sprites_corrida):
+                    self.sprite_i = 0
+                    self.pulo_animado = False
+                self.image = self.sprites_corrida[self.sprite_i]
+            else:
+                self.image = self.sprites_corrida[self.sprite_i]
+        elif self.chute_animado:
+            if pygame.time.get.ticks() - self.sprite_t > self.sprite_delay:
+                self.sprite_t = pygame.time.get.ticks()
+                self.sprite_i +=1
+                if self.sprite_i >= len(self.sprites_chute):
+                    self.sprite_i = 0
+                    self.pulo_animado = False
+                self.image = self.sprites_chute[self.sprite_i]
+            else:
+                self.image = self.sprites_chute[self.sprite_i]
 
     def aplicar_dano(self, dano):
         """Método para reduzir a vida (HP) do lutador."""
         self.hp -= dano
         if self.hp < 0:
             self.hp = 0  # Impede que a vida seja negativa
+            self.morte_animada = True
 
     def soco(self):
         """Método para realizar o soco e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
@@ -72,6 +115,7 @@ class Lutador(pygame.sprite.Sprite):
 
     def chute(self):
         """Método para realizar o soco especial e causar dano ao oponente, com a hitbox no sentido contrário do movimento."""
+        self.sprite_i = 0
         soco_largura = 30  # Largura da hitbox do golpe especial
         soco_altura = 50  # Altura da hitbox do golpe especial
 
@@ -99,13 +143,17 @@ class Lutador(pygame.sprite.Sprite):
         # Movimentos horizontais
         if mov[pygame.K_a]:  # Movimento para a esquerda
             dimensao_x = -mov_velocidade
+            self.corrida_animado = True
         elif mov[pygame.K_d]:  # Movimento para a direita
             dimensao_x = mov_velocidade
-
+            self.corrida_animado = True
+        else:
+            self.corrida_animado = False
         # Movimento de pulo
         if mov[pygame.K_w] and self.no_chao:
             self.velocidade_y = self.impulso
             self.no_chao = False
+            self. pulo_animado = True
 
         # Aplica a gravidade
         if not self.no_chao:
@@ -116,6 +164,7 @@ class Lutador(pygame.sprite.Sprite):
                 self.rect.y = 600
                 self.no_chao = True
                 self.velocidade_y = 0
+                self.pulo_animado = False
 
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
@@ -150,13 +199,18 @@ class Lutador(pygame.sprite.Sprite):
         # Movimentos horizontais (setas)
         if mov[pygame.K_LEFT]:  # Movimento para a esquerda
             dimensao_x = -mov_velocidade
+            self.corrida_animado = True
         elif mov[pygame.K_RIGHT]:  # Movimento para a direita
             dimensao_x = mov_velocidade
+            self.corrida_animado = True
+        else:
+            self.corrida_animado = False
 
         # Movimento de pulo (seta para cima)
         if mov[pygame.K_UP] and self.no_chao:
             self.velocidade_y = self.impulso
             self.no_chao = False
+            self.pulo_animado = True
 
         # Aplica a gravidade
         if not self.no_chao:
@@ -167,6 +221,7 @@ class Lutador(pygame.sprite.Sprite):
                 self.rect.y = 600
                 self.no_chao = True
                 self.velocidade_y = 0
+                self.pulo_animado = False
 
         self.rect.x += dimensao_x
         self.rect.y += dimensao_y
