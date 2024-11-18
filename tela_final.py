@@ -10,6 +10,10 @@ pygame.init()
 largura_tela = 1540
 altura_tela = 805
 
+pygame.mixer.init()
+pygame.mixer.music.load("527650__fupicat__winsquare.ogg")
+pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.play(loops=1)
 # Cria a janela principal do jogo
 janela = pygame.display.set_mode((largura_tela, altura_tela))
 

@@ -63,6 +63,11 @@ def limitar_posicao(lutador):
 # Criando dois objetos Lutador, um na posição (1000, 600) e outro em (100, 600)
 lutador1 = Lutador(1300, 600)
 lutador2 = Lutador(100, 600)
+pygame.mixer.init()
+pygame.mixer.music.stop
+pygame.mixer.music.load("416632__sirkoto51__castle-music-loop-1.ogg")
+pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.play(loops=-1)
 
 # Loop principal do jogo, responsável por controlar a execução do jogo
 ini = True
@@ -113,13 +118,13 @@ while ini:
 
     if jogador2st == "morto":
         vencedor = "Jogador 1"
-        subprocess.run(["python", "tela_final.py"])
         pygame.quit()
+        subprocess.run(["python", "tela_final.py"])
         sys.exit()
     elif jogador1st == "morto":
         vencedor = "Jogador 2"
-        subprocess.run(["python", "tela_final.py"])
         pygame.quit()
+        subprocess.run(["python", "tela_final.py"])
         sys.exit()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

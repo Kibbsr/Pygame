@@ -48,6 +48,11 @@ fundo = pygame.image.load("arenaluta3.png").convert_alpha()
 # Redimensionando a imagem do fundo para que ela tenha as dimensões da janela
 fundo = pygame.transform.scale(fundo, (largura_tela, altura_tela))
 
+pygame.mixer.music.stop
+pygame.mixer.music.load("703049__gambot8__original-clouds-sheep-music-the-game-music.ogg")
+pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.play(loops=-1)
+
 # Função que desenha o fundo na tela
 def plano():
     # Blitando (desenhando) a imagem do fundo na posição (0,0) da janela
@@ -118,13 +123,13 @@ while ini:
 
     if jogador2st == "morto":
         vencedor = "Jogador 1"
-        subprocess.run(["python", "tela_final.py"])
         pygame.quit()
+        subprocess.run(["python", "tela_final.py"])
         sys.exit()
     elif jogador1st == "morto":
         vencedor = "Jogador 2"
-        subprocess.run(["python", "tela_final.py"])
         pygame.quit()
+        subprocess.run(["python", "tela_final.py"])
         sys.exit()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
