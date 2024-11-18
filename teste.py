@@ -106,8 +106,7 @@ class Lutador(pygame.sprite.Sprite):
                     self.sprite_i = 0
                     self.pulo_animado = False
                 self.image = self.sprites_corrida_esquerda[self.sprite_i]
-            else:
-                self.image = self.sprites_corrida_esquerda[self.sprite_i]
+
 
         elif self.chute_animado:
             if pygame.time.get_ticks() - self.sprite_t > self.sprite_delay:

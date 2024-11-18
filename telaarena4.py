@@ -128,7 +128,7 @@ while ini:
     elif jogador1st == "morto":
         vencedor = "Jogador 2"
         pygame.quit()
-        subprocess.run(["python", "tela_final.py"])
+        subprocess.run(["python", "tela_final2.py"])
         sys.exit()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
